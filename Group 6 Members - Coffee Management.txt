@@ -1,0 +1,9 @@
+Group 6 Members - Coffee Management System
+Prudente, Kin Edrian G.
+Dairo, Junver
+Villan, Keanen ruzzel v.
+Escobar, Jarence
+Yutuc, joshua vladimhier S.'
+
+source code:
+https://github.com/kEgP-com/coffee-management-system
