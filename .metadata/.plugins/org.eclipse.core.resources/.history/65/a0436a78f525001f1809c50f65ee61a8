@@ -1,0 +1,63 @@
+package kape_System;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+
+@SuppressWarnings("unused")
+public class product_page extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private final JLabel lblBackground = new JLabel("image");
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					product_page frame = new product_page();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public product_page() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 619, 502);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		
+		JLabel lblBackground = new JLabel();
+	    java.net.URL imgURL = getClass().getResource("/kape_System/image/background_kape.png");
+	    if (imgURL != null) {
+	        System.out.println("Image URL: " + imgURL);
+	        lblBackground.setIcon(new ImageIcon(imgURL));
+	    } else {
+	        System.err.println("Couldn't find file: /kape_System/image/background_kape.png");
+	    }
+
+	    // Set the size and position of lblBackground
+	    lblBackground.setBounds(0, 0, 619, 502);
+
+	    // Add lblBackground to contentPane
+	    contentPane.add(lblBackground);
+	}
+}

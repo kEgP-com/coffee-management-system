@@ -1,0 +1,117 @@
+package kape_system_admin;
+
+import java.awt.EventQueue;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class user_admin_settings_page extends JFrame {
+
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JTextField txtEmail;
+    private JPasswordField txtPassword;
+    private JPasswordField txtConfirmPassword;
+    private JComboBox<String> comboBoxTheme;
+    private JCheckBox chkEnableNotifications;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    user_admin_settings_page frame = new user_admin_settings_page();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the frame.
+     */
+    public user_admin_settings_page() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 500, 400);
+        setResizable(false);
+        
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        JLabel lblEmail = new JLabel("Email:");
+        lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblEmail.setBounds(50, 50, 150, 25);
+        contentPane.add(lblEmail);
+
+        txtEmail = new JTextField();
+        txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        txtEmail.setBounds(200, 50, 200, 25);
+        contentPane.add(txtEmail);
+        txtEmail.setColumns(10);
+
+        JLabel lblPassword = new JLabel("Password:");
+        lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblPassword.setBounds(50, 100, 150, 25);
+        contentPane.add(lblPassword);
+
+        txtPassword = new JPasswordField();
+        txtPassword.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        txtPassword.setBounds(200, 100, 200, 25);
+        contentPane.add(txtPassword);
+
+        JLabel lblConfirmPassword = new JLabel("Confirm Password:");
+        lblConfirmPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblConfirmPassword.setBounds(50, 150, 150, 25);
+        contentPane.add(lblConfirmPassword);
+
+        txtConfirmPassword = new JPasswordField();
+        txtConfirmPassword.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        txtConfirmPassword.setBounds(200, 150, 200, 25);
+        contentPane.add(txtConfirmPassword);
+
+        JLabel lblTheme = new JLabel("Theme:");
+        lblTheme.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblTheme.setBounds(50, 200, 150, 25);
+        contentPane.add(lblTheme);
+
+        comboBoxTheme = new JComboBox<>(new String[]{"Light", "Dark"});
+        comboBoxTheme.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        comboBoxTheme.setBounds(200, 200, 200, 25);
+        contentPane.add(comboBoxTheme);
+
+        chkEnableNotifications = new JCheckBox("Enable Notifications");
+        chkEnableNotifications.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        chkEnableNotifications.setBounds(50, 250, 200, 25);
+        contentPane.add(chkEnableNotifications);
+
+        JButton btnSave = new JButton("Save Settings");
+        btnSave.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        btnSave.setBounds(150, 300, 150, 30);
+        contentPane.add(btnSave);
+
+        btnSave.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String email = txtEmail.getText();
+                String password = new String(txtPassword.getPassword());
+                String confirmPassword = new String(txtConfirmPassword.getPassword());
+                String theme = comboBoxTheme.getSelectedItem().toString();
+                boolean enableNotifications = chkEnableNotifications.isSelected();
+
+                if (!email.isEmpty() && !password.isEmpty() && password.equals(confirmPassword)) {
+                    // Save settings logic here
+                    JOptionPane.showMessageDialog(null, "Settings saved successfully!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please make sure all fields are filled correctly.");
+                }
+            }
+        });
+    }
+}

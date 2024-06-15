@@ -1,0 +1,4 @@
+INDEX VERSION 1.134+C:\Users\kinpr\Desktop\Kape de cabuyao\.metadata\.plugins\org.eclipse.jdt.core
+3445812890.index
+3300975509.index
+1865797976.index

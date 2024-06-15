@@ -1,0 +1,107 @@
+package kape_system_admin;
+
+import java.awt.EventQueue;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JSeparator;
+import java.awt.Color;
+
+public class admin_panel extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					admin_panel frame = new admin_panel();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public admin_panel() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1333, 766);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mmMenu = new JMenu("Menu");
+		menuBar.add(mmMenu);
+		
+		JMenuItem mntmAccount = new JMenuItem("Account");
+		mmMenu.add(mntmAccount);
+		
+		JMenuItem mntmSettings = new JMenuItem("Settings");
+		mmMenu.add(mntmSettings);
+		
+		JMenuItem mntmLogout = new JMenuItem("Logout");
+		mmMenu.add(mntmLogout);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblBackground = new JLabel();
+        lblBackground.setBounds(-289, -38, 1748, 761);
+        lblBackground.setIcon(new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_system_admin\\admin_background.png"));
+
+        
+        JButton btnNewButton = new JButton("Orders");
+        btnNewButton.setBackground(new Color(255, 250, 240));
+        btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
+        btnNewButton.setBounds(374, 173, 178, 48);
+        contentPane.add(btnNewButton);
+
+        
+        JButton btnNewButton_1 = new JButton("User");
+        btnNewButton_1.setBackground(new Color(255, 250, 240));
+        btnNewButton_1.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
+        btnNewButton_1.setBounds(562, 173, 178, 48);
+        contentPane.add(btnNewButton_1);
+        
+        JButton btnNewButton_2 = new JButton("Product");
+        btnNewButton_2.setBackground(new Color(255, 250, 240));
+        btnNewButton_2.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		product_add_page adminProductPage = new product_add_page();
+        		adminProductPage.setVisible(true);
+        		dispose();
+        	}
+        });
+        btnNewButton_2.setBounds(750, 173, 178, 48);
+        contentPane.add(btnNewButton_2);
+        
+        
+        
+        contentPane.add(lblBackground);
+	}
+}

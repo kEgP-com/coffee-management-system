@@ -1,0 +1,30 @@
+package kape_System;
+
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
+public class backgroundPanel extends JPanel {
+    private static final long serialVersionUID = 1L;
+    private Image backgroundImage;
+
+    public backgroundPanel(String imagePath) {
+        // Load the image
+        try {
+            backgroundImage = new ImageIcon(getClass().getResource(imagePath)).getImage();
+        } catch (Exception e) {
+            System.err.println("Image not found: " + e.getMessage());
+        }
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (backgroundImage != null) {
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        } else {
+            g.drawString("Background image not found.", 10, 20);
+        }
+    }
+}

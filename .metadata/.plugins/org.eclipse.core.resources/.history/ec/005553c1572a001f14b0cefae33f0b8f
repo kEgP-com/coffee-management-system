@@ -1,0 +1,271 @@
+package kape_System;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class cart_page extends JFrame {
+
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private DefaultListModel<String> reciptList;
+    private JTextField textField;
+    private JTextField inputPayment;
+    private JLabel lblDetails;
+    private JLabel lblTotal;
+    private String enteredText = "";
+    private List<String> cartItems;
+    private List<String> removedItems = new ArrayList<>();
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    cart_page frame = new cart_page(null);
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public cart_page(List<String> cartItems) {
+        this.cartItems = cartItems != null ? new ArrayList<>(cartItems) : new ArrayList<>();
+        
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(250, 30, 1021, 719);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        JMenuBar menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+
+        JMenu mmMenu = new JMenu("Menu");
+        menuBar.add(mmMenu);
+
+        JMenuItem mtnmAccount = new JMenuItem("Account");
+        mmMenu.add(mtnmAccount);
+
+        JMenuItem mntmSettings = new JMenuItem("Settings");
+        mmMenu.add(mntmSettings);
+
+        JMenuItem mntmLogout = new JMenuItem("Logout");
+        mmMenu.add(mntmLogout);
+
+        mntmLogout.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                login_page login = new login_page();
+                login.setVisible(true);
+            }
+        });
+
+        JLabel lblBackground = new JLabel();
+        lblBackground.setBounds(-766, -40, 1958, 822);
+
+        lblTotal = new JLabel("Total: P0");
+        lblTotal.setOpaque(true);
+        lblTotal.setBackground(new Color(255, 255, 255));
+        lblTotal.setFont(new Font("Tahoma", Font.BOLD, 20));
+        lblTotal.setBounds(583, 276, 205, 43);
+
+        JComboBox<String> selPaymentMethod = new JComboBox<>();
+        selPaymentMethod.setModel(new DefaultComboBoxModel(new String[]{"GCASH", "PAYMAYA", "CREDIT CARD", "CASH ON DELIVERY"}));
+        selPaymentMethod.setBounds(583, 359, 205, 28);
+        selPaymentMethod.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    String selectedOption = (String) selPaymentMethod.getSelectedItem();
+                    if (selectedOption.equals("CREDIT CARD")) {
+                        lblDetails.setText("Enter Credit Card No.");
+                        lblDetails.setVisible(true);
+                        textField.setVisible(true);
+                        textField.setText(enteredText);
+                    } else if (selectedOption.equals("GCASH")) {
+                        lblDetails.setText("Enter GCASH No.");
+                        lblDetails.setVisible(true);
+                        textField.setVisible(true);
+                        textField.setText(enteredText);
+                    } else if (selectedOption.equals("PAYMAYA")) {
+                        lblDetails.setText("Enter Paymaya No.");
+                        lblDetails.setVisible(true);
+                        textField.setVisible(true);
+                        textField.setText(enteredText);
+                    } else {
+                        lblDetails.setVisible(false);
+                        textField.setVisible(false);
+                        textField.setText("");
+                        enteredText = ""; 
+                    }
+                }
+            }
+        });
+
+        textField = new JTextField();
+        textField.setBounds(519, 376, 205, 19);
+        textField.setColumns(10);
+        textField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                enteredText = textField.getText();
+            }
+        });
+
+        JButton btnPayment = new JButton("Checkout");
+        btnPayment.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int option = JOptionPane.showConfirmDialog(contentPane,"Are you sure you want to proceed with the payment?", "Confirm Payment", JOptionPane.YES_NO_OPTION);
+                if (option == JOptionPane.YES_OPTION) {
+                    String paymentMethod = (String) selPaymentMethod.getSelectedItem();
+                    String[] receiptContent = new String[reciptList.size()];
+                    for (int i = 0; i < reciptList.size(); i++) {
+                        receiptContent[i] = reciptList.getElementAt(i);
+                    }
+                    reciepts_return_page.displayRecieptsReturnPage(receiptContent);
+                    dispose();
+                }
+            }
+        });
+
+        btnPayment.setBounds(293, 484, 205, 43);
+        btnPayment.setFocusable(false);
+
+        JButton btnRemoveProduct = new JButton("Remove Product");
+        btnRemoveProduct.setBounds(583, 136, 136, 34);
+        btnRemoveProduct.setFocusable(false);
+        btnRemoveProduct.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                removeSelectedProduct(recieptList);
+            }
+        });
+
+        JButton btnRemoveAll = new JButton("Remove All");
+        btnRemoveAll.setBounds(631, 195, 85, 21);
+        btnRemoveAll.setFocusable(false);
+        btnRemoveAll.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                removeAllProducts();
+            }
+        });
+
+        JButton btnRestore = new JButton("Restore ");
+        btnRestore.setBounds(583, 180, 136, 34);
+        btnRestore.setFocusable(false);
+        btnRestore.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                restoreSelectedProduct(recieptList);
+            }
+        });
+
+        JButton btnRestoreAll = new JButton("Restore All");
+        btnRestoreAll.setFocusable(false);
+        btnRestoreAll.setBounds(583, 224, 136, 34);
+        btnRestoreAll.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                restoreAllProducts();
+            }
+        });
+
+        JLabel lblOptionPayment = new JLabel("Payment Option:");
+        lblOptionPayment.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        lblOptionPayment.setBounds(583, 329, 118, 13);
+
+        lblDetails = new JLabel("Enter Credit Card No.");
+        lblDetails.setBounds(583, 397, 136, 13);
+
+        inputPayment = new JTextField();
+        inputPayment.setBounds(583, 420, 205, 19);
+        inputPayment.setColumns(10);
+
+        reciptList = new DefaultListModel<>();
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(211, 120, 353, 343);
+        JList<String> recieptList = new JList<>(reciptList);
+        scrollPane.setViewportView(recieptList);
+
+        contentPane.add(lblTotal);
+        contentPane.add(selPaymentMethod);
+        contentPane.add(btnRemoveProduct);
+        contentPane.add(btnRestore);
+        contentPane.add(btnRestoreAll);
+        contentPane.add(lblOptionPayment);
+        contentPane.add(lblDetails);
+        contentPane.add(inputPayment);
+        contentPane.add(btnPayment);
+        contentPane.add(scrollPane);
+        contentPane.add(lblBackground);
+
+        lblDetails.setVisible(false);
+        inputPayment.setVisible(false);
+
+        // Add items from the cart
+        if (cartItems != null) {
+            for (String item : cartItems) {
+                reciptList.addElement(item);
+            }
+        }
+
+        updateTotal();
+    }
+
+    private void updateTotal() {
+        int total = 0;
+        for (int i = 0; i < reciptList.size(); i++) {
+            String item = reciptList.getElementAt(i);
+            String priceStr = item.split("P")[1];
+            int price = Integer.parseInt(priceStr.split(" ")[0]);
+            total += price;
+        }
+        lblTotal.setText("Total: P" + total);
+    }
+
+    private void removeSelectedProduct(JList<String> recieptList) {
+        int selectedIndex = recieptList.getSelectedIndex();
+        if (selectedIndex != -1) {
+            String removedItem = reciptList.remove(selectedIndex);
+            removedItems.add(removedItem);
+            updateTotal();
+        } else {
+            JOptionPane.showMessageDialog(contentPane, "No product selected to remove.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void removeAllProducts() {
+        int confirm = JOptionPane.showConfirmDialog(contentPane, "Are you sure you want to remove all products?", "Confirm", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            for (int i = 0; i < reciptList.size(); i++) {
+                removedItems.add(reciptList.getElementAt(i));
+            }
+            reciptList.clear();
+            updateTotal();
+        }
+    }
+
+    private void restoreSelectedProduct(JList<String> recieptList) {
+        if (!removedItems.isEmpty()) {
+            String restoredItem = removedItems.remove(removedItems.size() - 1);
+            reciptList.addElement(restoredItem);
+            updateTotal();
+        } else {
+            JOptionPane.showMessageDialog(contentPane, "No product to restore.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void restoreAllProducts() {
+        for (String item : removedItems) {
+            reciptList.addElement(item);
+        }
+        removedItems.clear();
+        updateTotal();
+    }
+}
+

@@ -1,0 +1,146 @@
+package kape_System;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
+public class product_page_p extends JFrame {
+
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private DefaultListModel<String> receiptModel;
+    private JTextField textField;
+    private JLabel lblPaymentDetails;
+    private String enteredText = "";
+
+    // Coffee product information
+    private String[] productNames = {"Espresso", "Cappuccino", "Latte", "Mocha"};
+    private String[] productTypes = {"Hot", "Cold"};
+    private int[] productPrices = {50, 60, 70, 80}; // Prices for small sizes
+
+    private JComboBox<String> comboBoxProducts;
+    private JComboBox<String> comboBoxTypes;
+    private JComboBox<String> comboBoxSizes;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    product_page frame = new product_page();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private double calculateTotal() {
+        double total = 0.0;
+        for (int i = 0; i < receiptModel.size(); i++) {
+            double itemValue = Double.parseDouble(receiptModel.getElementAt(i).split(" - ")[2]);
+            total += itemValue;
+        }
+        return total;
+    }
+
+    /**
+     * Create the frame.
+     */
+    public product_page_p() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 1021, 719);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        JLabel lblBackground = new JLabel();
+        lblBackground.setBounds(-766, -40, 1958, 822);
+        lblBackground.setIcon(new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_System\\product.png"));
+
+        JLabel lblTotal = new JLabel("Total: ");
+        lblTotal.setOpaque(true);
+        lblTotal.setBackground(new Color(255, 255, 255));
+        lblTotal.setFont(new Font("Tahoma", Font.BOLD, 20));
+        lblTotal.setBounds(583, 276, 205, 43);
+
+        comboBoxProducts = new JComboBox<>(productNames);
+        comboBoxProducts.setBounds(200, 50, 150, 30);
+        contentPane.add(comboBoxProducts);
+
+        comboBoxTypes = new JComboBox<>(productTypes);
+        comboBoxTypes.setBounds(400, 50, 150, 30);
+        contentPane.add(comboBoxTypes);
+
+        comboBoxSizes = new JComboBox<>(new String[]{"Small", "Medium", "Large"});
+        comboBoxSizes.setBounds(600, 50, 150, 30);
+        contentPane.add(comboBoxSizes);
+
+        JButton btnAddToCart = new JButton("Add to Cart");
+        btnAddToCart.setBounds(800, 50, 150, 30);
+        btnAddToCart.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                addProductToCart();
+            }
+        });
+        contentPane.add(btnAddToCart);
+
+        receiptModel = new DefaultListModel<>();
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(200, 100, 750, 300);
+        JList<String> list = new JList<>(receiptModel);
+        scrollPane.setViewportView(list);
+        contentPane.add(scrollPane);
+
+        JButton btnCheckout = new JButton("Checkout");
+        btnCheckout.setBounds(800, 500, 150, 30);
+        btnCheckout.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                proceedToCheckout();
+            }
+        });
+        contentPane.add(btnCheckout);
+
+        contentPane.add(lblTotal);
+        contentPane.add(lblBackground);
+    }
+
+    private void addProductToCart() {
+        String product = (String) comboBoxProducts.getSelectedItem();
+        String type = (String) comboBoxTypes.getSelectedItem();
+        String size = (String) comboBoxSizes.getSelectedItem();
+
+        int basePrice = productPrices[comboBoxProducts.getSelectedIndex()];
+        int sizePrice = 0;
+
+        if (size.equals("Medium")) {
+            sizePrice = 10;
+        } else if (size.equals("Large")) {
+            sizePrice = 20;
+        }
+
+        int price = basePrice + sizePrice;
+        receiptModel.addElement(product + " - " + type + " - " + price);
+    }
+
+    private void proceedToCheckout() {
+        String[] cartItems = new String[receiptModel.size()];
+        for (int i = 0; i < receiptModel.size(); i++) {
+            cartItems[i] = receiptModel.getElementAt(i);
+        }
+        product_page cartPage = new product_page(cartItems);
+        cartPage.setVisible(true);
+        dispose();
+    }
+}

@@ -1,0 +1,351 @@
+package kape_System;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Color;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
+import java.awt.Component;
+import javax.swing.border.TitledBorder;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JList;
+import javax.swing.ImageIcon;
+import javax.swing.DefaultComboBoxModel;
+
+public class menu_page extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JComboBox size1;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					menu_page frame = new menu_page();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public menu_page() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 757, 637);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel bgmenu1 = new JPanel();
+		bgmenu1.setLayout(null);
+		bgmenu1.setBorder(null);
+		bgmenu1.setBackground(new Color(248, 230, 129));
+		bgmenu1.setBounds(0, 175, 489, 211);
+		contentPane.add(bgmenu1);
+		
+		JLabel ItemName = new JLabel("Item Name");
+		ItemName.setForeground(Color.BLACK);
+		ItemName.setFont(new Font("Tahoma", Font.BOLD, 11));
+		ItemName.setBounds(49, 59, 81, 11);
+		bgmenu1.add(ItemName);
+		
+		JLabel Product1 = new JLabel("1. Americano Coffe");
+		Product1.setForeground(Color.BLACK);
+		Product1.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+		Product1.setBounds(38, 76, 156, 25);
+		bgmenu1.add(Product1);
+		
+		JLabel Pricelbl = new JLabel("Price");
+		Pricelbl.setForeground(Color.BLACK);
+		Pricelbl.setFont(new Font("Tahoma", Font.BOLD, 11));
+		Pricelbl.setBounds(204, 52, 46, 14);
+		bgmenu1.add(Pricelbl);
+		
+		JLabel Product2 = new JLabel("2. Capechino");
+		Product2.setForeground(Color.BLACK);
+		Product2.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+		Product2.setBounds(38, 100, 156, 25);
+		bgmenu1.add(Product2);
+		
+		JLabel Product3 = new JLabel("3. Dark Choco");
+		Product3.setForeground(Color.BLACK);
+		Product3.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+		Product3.setBounds(38, 126, 156, 25);
+		bgmenu1.add(Product3);
+		
+		JLabel Product4 = new JLabel("4. Caramel Machiato");
+		Product4.setForeground(Color.BLACK);
+		Product4.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+		Product4.setBounds(38, 151, 156, 25);
+		bgmenu1.add(Product4);
+		
+		JLabel Product5 = new JLabel("5. Dark Choco");
+		Product5.setForeground(Color.BLACK);
+		Product5.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+		Product5.setBounds(38, 175, 156, 25);
+		bgmenu1.add(Product5);
+		
+		JLabel Price1 = new JLabel("P50");
+		Price1.setForeground(Color.BLACK);
+		Price1.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+		Price1.setBounds(204, 76, 54, 25);
+		bgmenu1.add(Price1);
+		
+		JLabel Price2 = new JLabel("P50");
+		Price2.setForeground(Color.BLACK);
+		Price2.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+		Price2.setBounds(204, 100, 46, 25);
+		bgmenu1.add(Price2);
+		
+		JLabel Price3 = new JLabel("P50");
+		Price3.setForeground(Color.BLACK);
+		Price3.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+		Price3.setBounds(204, 126, 31, 25);
+		bgmenu1.add(Price3);
+		
+		JLabel Price4 = new JLabel("P50");
+		Price4.setForeground(Color.BLACK);
+		Price4.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+		Price4.setBounds(204, 151, 39, 25);
+		bgmenu1.add(Price4);
+		
+		JLabel Price5 = new JLabel("P50");
+		Price5.setForeground(Color.BLACK);
+		Price5.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+		Price5.setBounds(204, 175, 31, 25);
+		bgmenu1.add(Price5);
+		
+		size1 = new JComboBox();
+		size1.setModel(new DefaultComboBoxModel(new String[] {"BIG", "SMALL"}));
+		size1.setBounds(262, 75, 81, 22);
+		bgmenu1.add(size1);
+		
+		JLabel lblSize1 = new JLabel("Size");
+		lblSize1.setForeground(Color.BLACK);
+		lblSize1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblSize1.setBounds(290, 52, 46, 14);
+		bgmenu1.add(lblSize1);
+		
+		JComboBox Size2 = new JComboBox();
+		Size2.setModel(new DefaultComboBoxModel(new String[] {"BIG", "SMALL"}));
+		Size2.setBounds(262, 99, 81, 22);
+		bgmenu1.add(Size2);
+		
+		JComboBox Size4 = new JComboBox();
+		Size4.setModel(new DefaultComboBoxModel(new String[] {"BIG", "SMALL"}));
+		Size4.setBounds(262, 150, 81, 22);
+		bgmenu1.add(Size4);
+		
+		JComboBox Size3 = new JComboBox();
+		Size3.setModel(new DefaultComboBoxModel(new String[] {"BIG", "SMALL"}));
+		Size3.setBounds(262, 126, 81, 22);
+		bgmenu1.add(Size3);
+		
+		JComboBox Size5 = new JComboBox();
+		Size5.setModel(new DefaultComboBoxModel(new String[] {"BIG", "SMALL", ""}));
+		Size5.setBounds(262, 174, 81, 22);
+		bgmenu1.add(Size5);
+		
+		JButton btn1 = new JButton("ADD");
+		btn1.setBounds(365, 75, 89, 23);
+		bgmenu1.add(btn1);
+		
+		JButton btn2 = new JButton("ADD");
+		btn2.setBounds(365, 99, 89, 23);
+		bgmenu1.add(btn2);
+		
+		JButton btn3 = new JButton("ADD");
+		btn3.setBounds(365, 125, 89, 23);
+		bgmenu1.add(btn3);
+		
+		JButton btn4 = new JButton("ADD");
+		btn4.setBounds(365, 150, 89, 23);
+		bgmenu1.add(btn4);
+		
+		JButton btn5 = new JButton("ADD");
+		btn5.setBounds(365, 174, 89, 23);
+		bgmenu1.add(btn5);
+		
+		JLabel title1 = new JLabel("Cold Coffee");
+		title1.setBounds(99, 4, 257, 37);
+		bgmenu1.add(title1);
+		title1.setVerticalAlignment(SwingConstants.BOTTOM);
+		title1.setHorizontalTextPosition(SwingConstants.LEFT);
+		title1.setHorizontalAlignment(SwingConstants.CENTER);
+		title1.setForeground(Color.BLACK);
+		title1.setFont(new Font("Palatino Linotype", Font.BOLD | Font.ITALIC, 27));
+		title1.setBorder(null);
+		
+		JPanel bgmenu2 = new JPanel();
+		bgmenu2.setLayout(null);
+		bgmenu2.setBorder(null);
+		bgmenu2.setBackground(new Color(248, 230, 129));
+		bgmenu2.setBounds(252, 387, 489, 211);
+		contentPane.add(bgmenu2);
+		
+		JLabel ItemName1 = new JLabel("Item Name");
+		ItemName1.setForeground(Color.BLACK);
+		ItemName1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		ItemName1.setBounds(49, 59, 81, 11);
+		bgmenu2.add(ItemName1);
+		
+		JLabel ProductHot1 = new JLabel("1. Americano Coffe");
+		ProductHot1.setForeground(Color.BLACK);
+		ProductHot1.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+		ProductHot1.setBounds(38, 76, 156, 25);
+		bgmenu2.add(ProductHot1);
+		
+		JLabel title2 = new JLabel("Hot Coffee");
+		title2.setVerticalAlignment(SwingConstants.BOTTOM);
+		title2.setHorizontalTextPosition(SwingConstants.LEFT);
+		title2.setHorizontalAlignment(SwingConstants.CENTER);
+		title2.setForeground(Color.BLACK);
+		title2.setFont(new Font("Palatino Linotype", Font.BOLD | Font.ITALIC, 27));
+		title2.setBorder(null);
+		title2.setBounds(131, 11, 257, 37);
+		bgmenu2.add(title2);
+		
+		JLabel Pricelbl1 = new JLabel("Price");
+		Pricelbl1.setForeground(Color.BLACK);
+		Pricelbl1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		Pricelbl1.setBounds(204, 52, 46, 14);
+		bgmenu2.add(Pricelbl1);
+		
+		JLabel ProductHot2 = new JLabel("2. Capechino");
+		ProductHot2.setForeground(Color.BLACK);
+		ProductHot2.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+		ProductHot2.setBounds(38, 100, 156, 25);
+		bgmenu2.add(ProductHot2);
+		
+		JLabel ProductHot3 = new JLabel("3. Dark Choco");
+		ProductHot3.setForeground(Color.BLACK);
+		ProductHot3.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+		ProductHot3.setBounds(38, 126, 156, 25);
+		bgmenu2.add(ProductHot3);
+		
+		JLabel ProductHot4 = new JLabel("4. Caramel Machiato");
+		ProductHot4.setForeground(Color.BLACK);
+		ProductHot4.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+		ProductHot4.setBounds(38, 151, 156, 25);
+		bgmenu2.add(ProductHot4);
+		
+		JLabel ProductHot5 = new JLabel("5. Dark Choco");
+		ProductHot5.setForeground(Color.BLACK);
+		ProductHot5.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+		ProductHot5.setBounds(38, 175, 156, 25);
+		bgmenu2.add(ProductHot5);
+		
+		JLabel PriceHot1 = new JLabel("P50");
+		PriceHot1.setForeground(Color.BLACK);
+		PriceHot1.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+		PriceHot1.setBounds(204, 76, 54, 25);
+		bgmenu2.add(PriceHot1);
+		
+		JLabel PriceHot2 = new JLabel("P50");
+		PriceHot2.setForeground(Color.BLACK);
+		PriceHot2.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+		PriceHot2.setBounds(204, 100, 46, 25);
+		bgmenu2.add(PriceHot2);
+		
+		JLabel PriceHot3 = new JLabel("P50");
+		PriceHot3.setForeground(Color.BLACK);
+		PriceHot3.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+		PriceHot3.setBounds(204, 126, 31, 25);
+		bgmenu2.add(PriceHot3);
+		
+		JLabel PriceHot4 = new JLabel("P50");
+		PriceHot4.setForeground(Color.BLACK);
+		PriceHot4.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+		PriceHot4.setBounds(204, 151, 39, 25);
+		bgmenu2.add(PriceHot4);
+		
+		JLabel PriceHot5 = new JLabel("P50");
+		PriceHot5.setForeground(Color.BLACK);
+		PriceHot5.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+		PriceHot5.setBounds(204, 175, 31, 25);
+		bgmenu2.add(PriceHot5);
+		
+		JComboBox SizeHot1 = new JComboBox();
+		SizeHot1.setModel(new DefaultComboBoxModel(new String[] {"BIG", "SMALL"}));
+		SizeHot1.setBounds(262, 75, 81, 22);
+		bgmenu2.add(SizeHot1);
+		
+		JLabel lblSize2 = new JLabel("Size");
+		lblSize2.setForeground(Color.BLACK);
+		lblSize2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblSize2.setBounds(290, 52, 46, 14);
+		bgmenu2.add(lblSize2);
+		
+		JComboBox SizeHot2 = new JComboBox();
+		SizeHot2.setModel(new DefaultComboBoxModel(new String[] {"BIG", "SMALL"}));
+		SizeHot2.setBounds(262, 99, 81, 22);
+		bgmenu2.add(SizeHot2);
+		
+		JComboBox SizeHot4 = new JComboBox();
+		SizeHot4.setModel(new DefaultComboBoxModel(new String[] {"BIG", "SMALL"}));
+		SizeHot4.setBounds(262, 150, 81, 22);
+		bgmenu2.add(SizeHot4);
+		
+		JComboBox SizeHot3 = new JComboBox();
+		SizeHot3.setModel(new DefaultComboBoxModel(new String[] {"BIG", "SMALL"}));
+		SizeHot3.setBounds(262, 126, 81, 22);
+		bgmenu2.add(SizeHot3);
+		
+		JComboBox SizeHot5 = new JComboBox();
+		SizeHot5.setModel(new DefaultComboBoxModel(new String[] {"BIG", "SMALL"}));
+		SizeHot5.setBounds(262, 174, 81, 22);
+		bgmenu2.add(SizeHot5);
+		
+		JButton btn6 = new JButton("ADD");
+		btn6.setBounds(365, 75, 89, 23);
+		bgmenu2.add(btn6);
+		
+		JButton btn7 = new JButton("ADD");
+		btn7.setBounds(365, 99, 89, 23);
+		bgmenu2.add(btn7);
+		
+		JButton btn8 = new JButton("ADD");
+		btn8.setBounds(365, 125, 89, 23);
+		bgmenu2.add(btn8);
+		
+		JButton btn9 = new JButton("ADD");
+		btn9.setBounds(365, 150, 89, 23);
+		bgmenu2.add(btn9);
+		
+		JButton btn10 = new JButton("ADD");
+		btn10.setBounds(365, 174, 89, 23);
+		bgmenu2.add(btn10);
+		
+		JLabel Picture3 = new JLabel("New label");
+		Picture3.setIcon(new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_System\\kape.jpeg"));
+		Picture3.setBounds(0, 0, 741, 173);
+		contentPane.add(Picture3);
+		
+		JLabel Picture1 = new JLabel("New label");
+		Picture1.setIcon(new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_System\\kape_1.jpeg"));
+		Picture1.setBounds(490, 175, 251, 211);
+		contentPane.add(Picture1);
+		
+		JLabel Picture2 = new JLabel("New label");
+		Picture2.setBounds(0, 387, 255, 211);
+		contentPane.add(Picture2);
+		Picture2.setIcon(new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_System\\kape_2.PNG"));
+	}
+}

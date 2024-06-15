@@ -1,0 +1,183 @@
+package kape_System;
+
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import javax.swing.JButton;
+import java.awt.Font;
+import javax.swing.JPasswordField;
+import java.awt.Color;
+import javax.swing.UIManager;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+
+public class login_page extends JFrame {
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JTextField Juser;
+    private JPasswordField JPassword;
+    private JComboBox<String> userOption;
+
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    login_page frame = new login_page();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public login_page() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 653, 478);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        JLabel lblUsername = new JLabel("Username :");
+        lblUsername.setFont(new Font("Bell MT", Font.PLAIN, 11));
+        lblUsername.setBounds(184, 99, 57, 14);
+        contentPane.add(lblUsername);
+
+        JLabel lblPassword = new JLabel("Password :");
+        lblPassword.setFont(new Font("Bell MT", Font.PLAIN, 11));
+        lblPassword.setBounds(184, 139, 57, 14);
+        contentPane.add(lblPassword);
+
+        Juser = new JTextField();
+        Juser.setFont(new Font("Bell MT", Font.PLAIN, 11));
+        Juser.setBounds(253, 97, 148, 20);
+        contentPane.add(Juser);
+        Juser.setColumns(10);
+
+        JPassword = new JPasswordField();
+        JPassword.setFont(new Font("Bell MT", Font.PLAIN, 11));
+        JPassword.setBounds(253, 133, 150, 20);
+        contentPane.add(JPassword);
+
+        JButton Jlogin = new JButton("Login");
+        Jlogin.addActionListener(new ActionListener() {
+            @SuppressWarnings("deprecation")
+            public void actionPerformed(ActionEvent e) {
+                if (Juser.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "please fill out username");
+                } else if (JPassword.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "please fill out Password");
+                } else if (Juser.getText().contains("keanen") && JPassword.getText().contains("123")) {
+                    String selectedOption = (String) userOption.getSelectedItem();
+                    if ("Admin".equals(selectedOption)) {
+                        try {
+                            kape_system_admin.admin_panel adminPanel = new kape_system_admin.admin_panel();
+                            adminPanel.setVisible(true);
+                            dispose();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else if ("User".equals(selectedOption)) {
+                        try {
+                            kape_System.home_page homePage = new kape_System.home_page();
+                            homePage.setVisible(true);
+                            dispose();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "wrong Username or Password!!", "Message", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        Jlogin.setFont(new Font("Bell MT", Font.PLAIN, 11));
+        Jlogin.setForeground(UIManager.getColor("Button.disabledForeground"));
+        Jlogin.setBackground(new Color(255, 240, 245));
+        Jlogin.setBounds(281, 173, 89, 23);
+        contentPane.add(Jlogin);
+
+        JLabel lblLogin = new JLabel("Log In");
+        lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
+        lblLogin.setForeground(new Color(160, 82, 45));
+        lblLogin.setBounds(276, 47, 94, 40);
+        lblLogin.setFont(new Font("Arial", Font.BOLD, 20));
+        contentPane.add(lblLogin);
+
+        JLabel lblPrivacyPolicy = new JLabel("Privacy Policy FAQ");
+        lblPrivacyPolicy.setHorizontalAlignment(SwingConstants.CENTER);
+        lblPrivacyPolicy.setFont(new Font("Bell MT", Font.BOLD, 10));
+        lblPrivacyPolicy.setBounds(253, 252, 148, 23);
+        contentPane.add(lblPrivacyPolicy);
+
+        JLabel btnRegister = new JLabel("<html><u>Register a new account</u></html>");
+        btnRegister.setHorizontalAlignment(SwingConstants.CENTER);
+        btnRegister.setFont(new Font("Bell MT", Font.PLAIN, 11));
+        btnRegister.setForeground(new Color(0, 0, 0));
+        btnRegister.setBounds(253, 226, 148, 23);
+        btnRegister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                personal_regis p1 = new personal_regis();
+                p1.setVisible(true);
+                dispose();
+            }
+        });
+        contentPane.add(btnRegister);
+
+        JLabel btnForgotPass = new JLabel("<html><u>Forgot Password?</u></html>");
+        btnForgotPass.setHorizontalAlignment(SwingConstants.CENTER);
+        btnForgotPass.setForeground(new Color(0, 0, 0));
+        btnForgotPass.setFont(new Font("Bell MT", Font.PLAIN, 11));
+        btnForgotPass.setBounds(253, 206, 148, 23);
+        btnForgotPass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                forgot_password_page forgotPasswordPage = new forgot_password_page();
+                forgotPasswordPage.setVisible(true);
+                dispose();
+            }
+        });
+        contentPane.add(btnForgotPass);
+
+        JCheckBox JCShowpass = new JCheckBox("");
+        JCShowpass.setBackground(new Color(240, 240, 240));
+        JCShowpass.setFont(new Font("Bell MT", Font.PLAIN, 11));
+        JCShowpass.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (JCShowpass.isSelected()) {
+                    JPassword.setEchoChar((char) 0);
+                } else {
+                    JPassword.setEchoChar('X');
+                }
+            }
+        });
+        JCShowpass.setBounds(409, 133, 21, 20);
+        contentPane.add(JCShowpass);
+
+        userOption = new JComboBox<>();
+        userOption.setModel(new DefaultComboBoxModel<>(new String[] {"User", "Admin"}));
+        userOption.setBounds(550, 10, 79, 23);
+        contentPane.add(userOption);
+
+        JLabel lblBox = new JLabel();
+        lblBox.setBounds(71, -25, 506, 381);
+        lblBox.setIcon(new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_System\\login_box.png"));
+
+        JLabel lblBackground = new JLabel();
+        lblBackground.setBounds(0, -41, 961, 613);
+        lblBackground.setIcon(new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_System\\background_kape.png"));
+        
+        contentPane.add(lblBox);
+        contentPane.add(lblBackground);
+
+    }
+}

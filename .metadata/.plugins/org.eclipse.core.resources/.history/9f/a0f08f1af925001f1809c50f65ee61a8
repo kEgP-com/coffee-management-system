@@ -1,0 +1,81 @@
+package kape_System;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import java.awt.Font;
+import java.awt.Color;
+import javax.swing.SwingConstants;
+
+@SuppressWarnings("unused")
+public class product_page extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private final JLabel lblBackground = new JLabel("image");
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					product_page frame = new product_page();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public product_page() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 905, 575);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		
+		JLabel lblBackground = new JLabel();
+        lblBackground.setBounds(0, 0, 891, 538);
+        ImageIcon icon = new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_System\\background_kape.png");
+        lblBackground.setIcon(icon);
+        
+        
+        JLabel lblTotal = new JLabel("Total: ");
+        lblTotal.setHorizontalAlignment(SwingConstants.LEFT);
+        lblTotal.setOpaque(true);
+        lblTotal.setBackground(new Color(255, 255, 255));
+        lblTotal.setFont(new Font("Tahoma", Font.PLAIN, 26));
+        lblTotal.setBounds(568, 372, 223, 49);
+
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(512, 42, 330, 320);
+        
+        
+        
+        
+        JList list = new JList();
+        scrollPane.setViewportView(list);
+        
+        contentPane.add(lblTotal);
+        contentPane.add(scrollPane);
+        contentPane.add(lblBackground);
+        
+        
+	}
+}

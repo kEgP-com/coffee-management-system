@@ -1,0 +1,477 @@
+package kape_System;
+
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Color;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class menu_page extends JFrame {
+
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    menu_page frame = new menu_page();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the frame.
+     */
+    public menu_page() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 719, 611);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        JLabel ItemName1 = new JLabel("Item Name");
+        ItemName1.setBounds(162, 114, 81, 11);
+        contentPane.add(ItemName1);
+        ItemName1.setForeground(Color.BLACK);
+        ItemName1.setFont(new Font("Tahoma", Font.BOLD, 11));
+
+        JLabel ProductHot1 = new JLabel("1. Americano Coffee");
+        ProductHot1.setBounds(151, 131, 156, 25);
+        contentPane.add(ProductHot1);
+        ProductHot1.setForeground(Color.BLACK);
+        ProductHot1.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+
+        JLabel title2 = new JLabel("Hot Coffee");
+        title2.setBounds(212, 63, 257, 37);
+        contentPane.add(title2);
+        title2.setVerticalAlignment(SwingConstants.BOTTOM);
+        title2.setHorizontalTextPosition(SwingConstants.LEFT);
+        title2.setHorizontalAlignment(SwingConstants.CENTER);
+        title2.setForeground(Color.BLACK);
+        title2.setFont(new Font("Palatino Linotype", Font.BOLD | Font.ITALIC, 27));
+        title2.setBorder(null);
+
+        JLabel Pricelbl1 = new JLabel("Price");
+        Pricelbl1.setBounds(317, 107, 46, 14);
+        contentPane.add(Pricelbl1);
+        Pricelbl1.setForeground(Color.BLACK);
+        Pricelbl1.setFont(new Font("Tahoma", Font.BOLD, 11));
+
+        JLabel PriceHot1 = new JLabel("P39");
+        PriceHot1.setBounds(317, 131, 54, 25);
+        contentPane.add(PriceHot1);
+        PriceHot1.setForeground(Color.BLACK);
+        PriceHot1.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+
+        JComboBox<String> SizeHot1 = new JComboBox<>();
+        SizeHot1.setBounds(375, 130, 81, 22);
+        contentPane.add(SizeHot1);
+        SizeHot1.setModel(new DefaultComboBoxModel<>(new String[]{"Small", "Medium", "Large"}));
+        SizeHot1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String selectedSize = (String) SizeHot1.getSelectedItem();
+                switch (selectedSize) {
+                    case "Small":
+                        PriceHot1.setText("P39");
+                        break;
+                    case "Medium":
+                        PriceHot1.setText("P49");
+                        break;
+                    case "Large":
+                        PriceHot1.setText("P59");
+                        break;
+                }
+            }
+        });
+
+        JLabel lblSize1 = new JLabel("Size");
+        lblSize1.setBounds(403, 107, 46, 14);
+        contentPane.add(lblSize1);
+        lblSize1.setForeground(Color.BLACK);
+        lblSize1.setFont(new Font("Tahoma", Font.BOLD, 11));
+
+        JLabel ProductHot2 = new JLabel("2. Cappuccino");
+        ProductHot2.setBounds(151, 155, 156, 25);
+        contentPane.add(ProductHot2);
+        ProductHot2.setForeground(Color.BLACK);
+        ProductHot2.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+
+        JLabel PriceHot2 = new JLabel("P39");
+        PriceHot2.setBounds(317, 155, 54, 25);
+        contentPane.add(PriceHot2);
+        PriceHot2.setForeground(Color.BLACK);
+        PriceHot2.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+
+        JComboBox<String> SizeHot2 = new JComboBox<>();
+        SizeHot2.setBounds(375, 154, 81, 22);
+        contentPane.add(SizeHot2);
+        SizeHot2.setModel(new DefaultComboBoxModel<>(new String[]{"Small", "Medium", "Large"}));
+        SizeHot2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String selectedSize = (String) SizeHot2.getSelectedItem();
+                switch (selectedSize) {
+                    case "Small":
+                        PriceHot2.setText("P39");
+                        break;
+                    case "Medium":
+                        PriceHot2.setText("P49");
+                        break;
+                    case "Large":
+                        PriceHot2.setText("P59");
+                        break;
+                }
+            }
+        });
+
+        JLabel ProductHot3 = new JLabel("3. Dark Choco");
+        ProductHot3.setBounds(151, 181, 156, 25);
+        contentPane.add(ProductHot3);
+        ProductHot3.setForeground(Color.BLACK);
+        ProductHot3.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+
+        JLabel PriceHot3 = new JLabel("P39");
+        PriceHot3.setBounds(317, 181, 54, 25);
+        contentPane.add(PriceHot3);
+        PriceHot3.setForeground(Color.BLACK);
+        PriceHot3.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+
+        JComboBox<String> SizeHot3 = new JComboBox<>();
+        SizeHot3.setBounds(375, 181, 81, 22);
+        contentPane.add(SizeHot3);
+        SizeHot3.setModel(new DefaultComboBoxModel<>(new String[]{"Small", "Medium", "Large"}));
+        SizeHot3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String selectedSize = (String) SizeHot3.getSelectedItem();
+                switch (selectedSize) {
+                    case "Small":
+                        PriceHot3.setText("P39");
+                        break;
+                    case "Medium":
+                        PriceHot3.setText("P49");
+                        break;
+                    case "Large":
+                        PriceHot3.setText("P59");
+                        break;
+                }
+            }
+        });
+
+        JLabel ProductHot4 = new JLabel("4. Caramel Machiato");
+        ProductHot4.setBounds(151, 206, 156, 25);
+        contentPane.add(ProductHot4);
+        ProductHot4.setForeground(Color.BLACK);
+        ProductHot4.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+
+        JLabel PriceHot4 = new JLabel("P39");
+        PriceHot4.setBounds(317, 206, 54, 25);
+        contentPane.add(PriceHot4);
+        PriceHot4.setForeground(Color.BLACK);
+        PriceHot4.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+
+        JComboBox<String> SizeHot4 = new JComboBox<>();
+        SizeHot4.setBounds(375, 206, 81, 22);
+        contentPane.add(SizeHot4);
+        SizeHot4.setModel(new DefaultComboBoxModel<>(new String[]{"Small", "Medium", "Large"}));
+        SizeHot4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String selectedSize = (String) SizeHot4.getSelectedItem();
+                switch (selectedSize) {
+                    case "Small":
+                        PriceHot4.setText("P39");
+                        break;
+                    case "Medium":
+                        PriceHot4.setText("P49");
+                        break;
+                    case "Large":
+                        PriceHot4.setText("P59");
+                        break;
+                }
+            }
+        });
+
+        JLabel ProductHot5 = new JLabel("5. Dark Choco");
+        ProductHot5.setBounds(151, 230, 156, 25);
+        contentPane.add(ProductHot5);
+        ProductHot5.setForeground(Color.BLACK);
+        ProductHot5.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+
+        JLabel PriceHot5 = new JLabel("P39");
+        PriceHot5.setBounds(317, 230, 54, 25);
+        contentPane.add(PriceHot5);
+        PriceHot5.setForeground(Color.BLACK);
+        PriceHot5.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+
+        JComboBox<String> SizeHot5 = new JComboBox<>();
+        SizeHot5.setBounds(375, 230, 81, 22);
+        contentPane.add(SizeHot5);
+        SizeHot5.setModel(new DefaultComboBoxModel<>(new String[]{"Small", "Medium", "Large"}));
+        SizeHot5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String selectedSize = (String) SizeHot5.getSelectedItem();
+                switch (selectedSize) {
+                    case "Small":
+                        PriceHot5.setText("P39");
+                        break;
+                    case "Medium":
+                        PriceHot5.setText("P49");
+                        break;
+                    case "Large":
+                        PriceHot5.setText("P59");
+                        break;
+                }
+            }
+        });
+
+        JButton btn6 = new JButton("ADD");
+        btn6.setBounds(478, 130, 89, 23);
+        contentPane.add(btn6);
+
+        JButton btn7 = new JButton("ADD");
+        btn7.setBounds(478, 154, 89, 23);
+        contentPane.add(btn7);
+
+        JButton btn8 = new JButton("ADD");
+        btn8.setBounds(478, 180, 89, 23);
+        contentPane.add(btn8);
+
+        JButton btn9 = new JButton("ADD");
+        btn9.setBounds(478, 205, 89, 23);
+        contentPane.add(btn9);
+
+        JButton btn10 = new JButton("ADD");
+        btn10.setBounds(478, 229, 89, 23);
+        contentPane.add(btn10);
+
+        JLabel ItemName = new JLabel("Item Name");
+        ItemName.setBounds(162, 347, 81, 11);
+        contentPane.add(ItemName);
+        ItemName.setForeground(Color.BLACK);
+        ItemName.setFont(new Font("Tahoma", Font.BOLD, 11));
+
+        JLabel Product1 = new JLabel("1. Americano Coffee");
+        Product1.setBounds(151, 364, 156, 25);
+        contentPane.add(Product1);
+        Product1.setForeground(Color.BLACK);
+        Product1.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+
+        JLabel Pricelbl = new JLabel("Price");
+        Pricelbl.setBounds(317, 340, 46, 14);
+        contentPane.add(Pricelbl);
+        Pricelbl.setForeground(Color.BLACK);
+        Pricelbl.setFont(new Font("Tahoma", Font.BOLD, 11));
+
+        JLabel Price1 = new JLabel("P39");
+        Price1.setBounds(317, 364, 54, 25);
+        contentPane.add(Price1);
+        Price1.setForeground(Color.BLACK);
+        Price1.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+
+        JComboBox<String> Size1 = new JComboBox<>();
+        Size1.setBounds(375, 363, 81, 22);
+        contentPane.add(Size1);
+        Size1.setModel(new DefaultComboBoxModel<>(new String[]{"Small", "Medium", "Large"}));
+        Size1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String selectedSize = (String) Size1.getSelectedItem();
+                switch (selectedSize) {
+                    case "Small":
+                        Price1.setText("P39");
+                        break;
+                    case "Medium":
+                        Price1.setText("P49");
+                        break;
+                    case "Large":
+                        Price1.setText("P59");
+                        break;
+                }
+            }
+        });
+
+        JLabel lblSize11 = new JLabel("Size");
+        lblSize11.setBounds(403, 340, 46, 14);
+        contentPane.add(lblSize11);
+        lblSize11.setForeground(Color.BLACK);
+        lblSize11.setFont(new Font("Tahoma", Font.BOLD, 11));
+
+        JLabel Product2 = new JLabel("2. Cappuccino");
+        Product2.setBounds(151, 388, 156, 25);
+        contentPane.add(Product2);
+        Product2.setForeground(Color.BLACK);
+        Product2.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+
+        JLabel Price2 = new JLabel("P39");
+        Price2.setBounds(317, 388, 54, 25);
+        contentPane.add(Price2);
+        Price2.setForeground(Color.BLACK);
+        Price2.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+
+        JComboBox<String> Size2 = new JComboBox<>();
+        Size2.setBounds(375, 387, 81, 22);
+        contentPane.add(Size2);
+        Size2.setModel(new DefaultComboBoxModel<>(new String[]{"Small", "Medium", "Large"}));
+        Size2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String selectedSize = (String) Size2.getSelectedItem();
+                switch (selectedSize) {
+                    case "Small":
+                        Price2.setText("P39");
+                        break;
+                    case "Medium":
+                        Price2.setText("P49");
+                        break;
+                    case "Large":
+                        Price2.setText("P59");
+                        break;
+                }
+            }
+        });
+
+        JLabel Product3 = new JLabel("3. Dark Choco");
+        Product3.setBounds(151, 414, 156, 25);
+        contentPane.add(Product3);
+        Product3.setForeground(Color.BLACK);
+        Product3.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+
+        JLabel Price3 = new JLabel("P39");
+        Price3.setBounds(317, 414, 54, 25);
+        contentPane.add(Price3);
+        Price3.setForeground(Color.BLACK);
+        Price3.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+
+        JComboBox<String> Size3 = new JComboBox<>();
+        Size3.setBounds(375, 414, 81, 22);
+        contentPane.add(Size3);
+        Size3.setModel(new DefaultComboBoxModel<>(new String[]{"Small", "Medium", "Large"}));
+        Size3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String selectedSize = (String) Size3.getSelectedItem();
+                switch (selectedSize) {
+                    case "Small":
+                        Price3.setText("P39");
+                        break;
+                    case "Medium":
+                        Price3.setText("P49");
+                        break;
+                    case "Large":
+                        Price3.setText("P59");
+                        break;
+                }
+            }
+        });
+
+        JLabel Product4 = new JLabel("4. Caramel Machiato");
+        Product4.setBounds(151, 439, 156, 25);
+        contentPane.add(Product4);
+        Product4.setForeground(Color.BLACK);
+        Product4.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+
+        JLabel Price4 = new JLabel("P39");
+        Price4.setBounds(317, 439, 54, 25);
+        contentPane.add(Price4);
+        Price4.setForeground(Color.BLACK);
+        Price4.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+
+        JComboBox<String> Size4 = new JComboBox<>();
+        Size4.setBounds(375, 438, 81, 22);
+        contentPane.add(Size4);
+        Size4.setModel(new DefaultComboBoxModel<>(new String[]{"Small", "Medium", "Large"}));
+        Size4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String selectedSize = (String) Size4.getSelectedItem();
+                switch (selectedSize) {
+                    case "Small":
+                        Price4.setText("P39");
+                        break;
+                    case "Medium":
+                        Price4.setText("P49");
+                        break;
+                    case "Large":
+                        Price4.setText("P59");
+                        break;
+                }
+            }
+        });
+
+        JLabel Product5 = new JLabel("5. Dark Choco");
+        Product5.setBounds(151, 463, 156, 25);
+        contentPane.add(Product5);
+        Product5.setForeground(Color.BLACK);
+        Product5.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+
+        JLabel Price5 = new JLabel("P39");
+        Price5.setBounds(317, 463, 54, 25);
+        contentPane.add(Price5);
+        Price5.setForeground(Color.BLACK);
+        Price5.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+
+        JComboBox<String> Size5 = new JComboBox<>();
+        Size5.setBounds(375, 462, 81, 22);
+        contentPane.add(Size5);
+        Size5.setModel(new DefaultComboBoxModel<>(new String[]{"Small", "Medium", "Large"}));
+        Size5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String selectedSize = (String) Size5.getSelectedItem();
+                switch (selectedSize) {
+                    case "Small":
+                        Price5.setText("P39");
+                        break;
+                    case "Medium":
+                        Price5.setText("P49");
+                        break;
+                    case "Large":
+                        Price5.setText("P59");
+                        break;
+                }
+            }
+        });
+
+        JButton btn1 = new JButton("ADD");
+        btn1.setBounds(478, 363, 89, 23);
+        contentPane.add(btn1);
+
+        JButton btn2 = new JButton("ADD");
+        btn2.setBounds(478, 387, 89, 23);
+        contentPane.add(btn2);
+
+        JButton btn3 = new JButton("ADD");
+        btn3.setBounds(478, 413, 89, 23);
+        contentPane.add(btn3);
+
+        JButton btn4 = new JButton("ADD");
+        btn4.setBounds(478, 438, 89, 23);
+        contentPane.add(btn4);
+
+        JButton btn5 = new JButton("ADD");
+        btn5.setBounds(478, 462, 89, 23);
+        contentPane.add(btn5);
+
+        JLabel title1 = new JLabel("Cold Coffee");
+        title1.setBounds(212, 292, 257, 37);
+        contentPane.add(title1);
+        title1.setVerticalAlignment(SwingConstants.BOTTOM);
+        title1.setHorizontalTextPosition(SwingConstants.LEFT);
+        title1.setHorizontalAlignment(SwingConstants.CENTER);
+        title1.setForeground(Color.BLACK);
+        title1.setFont(new Font("Palatino Linotype", Font.BOLD | Font.ITALIC, 27));
+        title1.setBorder(null);
+    }
+}

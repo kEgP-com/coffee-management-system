@@ -1,0 +1,213 @@
+package kape_system_admin;
+
+import java.awt.EventQueue;
+import java.awt.Image;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import kape_System.login_page;
+import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class order_panel_page extends JFrame {
+
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private DefaultListModel<String> orderListModel;
+    private List<String> pendingOrders;
+    private List<String> originalOrders;
+    private JTextField textFieldOrder;
+    private JList<String> orderList;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    order_panel_page frame = new order_panel_page();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the frame.
+     */
+    public order_panel_page() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(510, 100, 777, 652);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        // Menu Bar
+        JMenuBar menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+
+        JMenu mmMenu = new JMenu("Menu");
+        menuBar.add(mmMenu);
+
+        JMenuItem mtnmAccount = new JMenuItem("Account");
+        ImageIcon accountIcon = new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_system_admin\\account.png");
+        Image accountImg = accountIcon.getImage();
+        Image newAccountImg = accountImg.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+        accountIcon = new ImageIcon(newAccountImg);
+        mtnmAccount.setIcon(accountIcon);
+        mmMenu.add(mtnmAccount);
+
+        JMenuItem mntmSettings = new JMenuItem("Settings");
+        ImageIcon settingsIcon = new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_system_admin\\settings.png");
+        Image settingsImg = settingsIcon.getImage();
+        Image newSettingsImg = settingsImg.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+        settingsIcon = new ImageIcon(newSettingsImg);
+        mntmSettings.setIcon(settingsIcon);
+        mmMenu.add(mntmSettings);
+
+        JMenuItem mntmLogout = new JMenuItem("Logout");
+        ImageIcon logoutIcon = new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_system_admin\\logout.png");
+        Image logoutImg = logoutIcon.getImage();
+        Image newLogoutImg = logoutImg.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+        logoutIcon = new ImageIcon(newLogoutImg);
+        mntmLogout.setIcon(logoutIcon);
+        mmMenu.add(mntmLogout);
+
+        mntmLogout.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                login_page login = new login_page();
+                login.setVisible(true);
+            }
+        });
+
+        JMenu mnPage = new JMenu("Page");
+        menuBar.add(mnPage);
+
+        JMenuItem mntmHome = new JMenuItem("Home");
+        mntmHome.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                admin_panel home = new admin_panel();
+                home.setVisible(true);
+                dispose();
+            }
+        });
+        mnPage.add(mntmHome);
+
+        JMenuItem mntmUser = new JMenuItem("User");
+        mnPage.add(mntmUser);
+
+        JMenuItem mntmProduct = new JMenuItem("Product");
+        mnPage.add(mntmProduct);
+
+        // Initialize order list model
+        orderListModel = new DefaultListModel<>();
+        orderList = new JList<>(orderListModel);
+        JScrollPane scrollPane = new JScrollPane(orderList);
+        scrollPane.setBounds(61, 46, 602, 300);
+        contentPane.add(scrollPane);
+
+        // Sample pending orders
+        pendingOrders = new ArrayList<>();
+        originalOrders = new ArrayList<>();
+        pendingOrders.add("Order 1: Item A, Item B, Item C");
+        pendingOrders.add("Order 2: Item D, Item E");
+        pendingOrders.add("Order 3: Item F, Item G, Item H");
+        
+        originalOrders.addAll(pendingOrders);  // Save the original state
+
+        for (String order : pendingOrders) {
+            orderListModel.addElement(order);
+        }
+
+        textFieldOrder = new JTextField();
+        textFieldOrder.setHorizontalAlignment(SwingConstants.TRAILING);
+        textFieldOrder.setBounds(61, 398, 446, 41);
+        contentPane.add(textFieldOrder);
+        textFieldOrder.setColumns(10);
+
+        JButton btnUpdate = new JButton("Update");
+        btnUpdate.setBounds(61, 449, 135, 41);
+        btnUpdate.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int selectedIndex = orderList.getSelectedIndex();
+                if (selectedIndex != -1) {
+                    String updatedOrder = textFieldOrder.getText();
+                    if (!updatedOrder.isEmpty()) {
+                        orderListModel.set(selectedIndex, updatedOrder);
+                        pendingOrders.set(selectedIndex, updatedOrder);
+                        textFieldOrder.setText("");
+                    } else {
+                        JOptionPane.showMessageDialog(contentPane, "Order text cannot be empty.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(contentPane, "No order selected to update.", "Selection Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        contentPane.add(btnUpdate);
+
+        JButton btnRemoveItem = new JButton("REMOVE");
+        btnRemoveItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int selectedIndex = orderList.getSelectedIndex();
+                if (selectedIndex != -1) {
+                    orderListModel.remove(selectedIndex);
+                    pendingOrders.remove(selectedIndex);
+                } else {
+                    JOptionPane.showMessageDialog(contentPane, "No order selected to remove.", "Selection Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        btnRemoveItem.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    orderListModel.clear();
+                    pendingOrders.clear();
+                }
+            }
+        });
+        btnRemoveItem.setBounds(216, 449, 135, 41);
+        contentPane.add(btnRemoveItem);
+
+        JButton btnRestore = new JButton("RESTORE");
+        btnRestore.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                orderListModel.clear();
+                pendingOrders.clear();
+                for (String order : originalOrders) {
+                    orderListModel.addElement(order);
+                    pendingOrders.add(order);
+                }
+            }
+        });
+        btnRestore.setBounds(372, 449, 135, 41);
+        contentPane.add(btnRestore);
+
+        JButton btnADD = new JButton("ADD");
+        btnADD.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String newOrder = textFieldOrder.getText();
+                if (!newOrder.isEmpty()) {
+                    orderListModel.addElement(newOrder);
+                    pendingOrders.add(newOrder);
+                    textFieldOrder.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(contentPane, "Order text cannot be empty.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        btnADD.setBounds(517, 398, 135, 41);
+        contentPane.add(btnADD);
+
+        JLabel lblNewLabel = new JLabel("Input Order/ Update Order");
+        lblNewLabel.setBounds(61, 375, 280, 13);
+        contentPane.add(lblNewLabel);
+    }
+}
+

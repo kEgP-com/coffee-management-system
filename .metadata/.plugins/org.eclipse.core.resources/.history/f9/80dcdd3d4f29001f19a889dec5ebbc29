@@ -1,0 +1,16 @@
+package kape_System;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ProductManager {
+    private static List<Product> products = new ArrayList<>();
+
+    public static void addProduct(Product product) {
+        products.add(product);
+    }
+
+    public static List<Product> getProducts() {
+        return products;
+    }
+}

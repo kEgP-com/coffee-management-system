@@ -1,0 +1,30 @@
+package kape_system_admin;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import kape_System.ProductPage;
+
+public class ProductStore {
+    private static ProductStore instance;
+    private List<ProductPage> products;
+
+    private ProductStore() {
+        products = new ArrayList<>();
+    }
+
+    public static synchronized ProductStore getInstance() {
+        if (instance == null) {
+            instance = new ProductStore();
+        }
+        return instance;
+    }
+
+    public void addProduct(ProductPage product) {
+        products.add(product);
+    }
+
+    public List<ProductPage> getProducts() {
+        return new ArrayList<>(products);
+    }
+}

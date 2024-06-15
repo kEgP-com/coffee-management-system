@@ -1,0 +1,152 @@
+package kape_system_admin;
+
+import java.awt.EventQueue;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import kape_System.login_page;
+
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JSeparator;
+import java.awt.Color;
+
+public class admin_panel extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					admin_panel frame = new admin_panel();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public admin_panel() {
+		 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	     setBounds(100, 100, 1333, 766);
+	     setResizable(false);
+
+	
+		
+		//Menu Bar
+		JMenuBar menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+
+        JMenu mmMenu = new JMenu("Menu");
+        menuBar.add(mmMenu);
+
+        JMenuItem mtnmAccount = new JMenuItem("Account");
+        ImageIcon accountIcon = new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_system_admin\\account.png");
+        Image accountImg = accountIcon.getImage();
+        Image newAccountImg = accountImg.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+        accountIcon = new ImageIcon(newAccountImg);
+        mtnmAccount.setIcon(accountIcon);
+        mmMenu.add(mtnmAccount);
+
+        JMenuItem mntmSettings = new JMenuItem("Settings");
+        ImageIcon settingsIcon = new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_system_admin\\settings.png");
+        Image settingsImg = settingsIcon.getImage();
+        Image newSettingsImg = settingsImg.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+        settingsIcon = new ImageIcon(newSettingsImg);
+        mntmSettings.setIcon(settingsIcon);
+        mmMenu.add(mntmSettings);
+        
+
+        JMenuItem mntmLogout = new JMenuItem("Logout");
+        ImageIcon logoutIcon = new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_system_admin\\logout.png");
+        Image logoutImg = logoutIcon.getImage();
+        Image newLogoutImg = logoutImg.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+        logoutIcon = new ImageIcon(newLogoutImg);
+        mntmLogout.setIcon(logoutIcon);
+        mmMenu.add(mntmLogout);
+                
+        mntmLogout.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		dispose(); 
+        		login_page login = new login_page(); 
+        		login.setVisible(true); 
+        	}
+        });
+
+        contentPane.add(menuBar);
+	
+        
+
+        //Content Main
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblBackground = new JLabel();
+        lblBackground.setBounds(-289, -38, 1748, 761);
+        lblBackground.setIcon(new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_system_admin\\admin_background.png"));
+
+        
+        JButton btnOrders = new JButton("Orders");
+        btnOrders.setBackground(new Color(255, 250, 240));
+        btnOrders.setFocusable(false);
+        btnOrders.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
+        btnOrders.setBounds(374, 173, 178, 48);
+
+
+        
+        JButton btnUser = new JButton("User");
+        btnUser.setBackground(new Color(255, 250, 240));
+        btnUser.setFocusable(false);
+        btnUser.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		user_admin_page userPage = new user_admin_page();
+        		userPage.setVisible(true);
+        		dispose();
+        	}
+        });
+        btnUser.setBounds(562, 173, 178, 48);
+
+        
+        JButton btnProduct = new JButton("Product");
+        btnProduct.setBackground(new Color(255, 250, 240));
+        btnProduct.setFocusable(false);
+        btnProduct.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		product_add_page productPage = new product_add_page();
+        		productPage.setVisible(true);
+        		dispose();
+        	}
+        });
+        btnProduct.setBounds(750, 173, 178, 48);
+
+        
+        contentPane.add(btnOrders);
+        contentPane.add(btnUser);
+        contentPane.add(btnProduct);
+        contentPane.add(lblBackground);
+	}
+}

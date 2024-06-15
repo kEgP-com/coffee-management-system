@@ -1,0 +1,194 @@
+package kape_system_admin;
+
+import java.awt.EventQueue;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
+public class user_admin_settings_page extends JFrame {
+
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JTable table;
+    private DefaultTableModel model;
+    private JTextField txtUsername;
+    private JTextField txtEmail;
+    private JTextField txtPassword;
+    private JComboBox<String> comboBoxRole;
+    private JButton btnAdd;
+    private JButton btnUpdate;
+    private JButton btnRemove;
+    private JButton btnRestore;
+    private List<Object[]> removedRows = new ArrayList<>();
+    private int selectedRowIndex = -1;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    user_admin_settings_page frame = new user_admin_settings_page();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the frame.
+     */
+    public user_admin_settings_page() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 1043, 770);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(50, 50, 600, 600);
+        contentPane.add(scrollPane);
+
+        model = new DefaultTableModel(new Object[]{"ID", "Username", "Email", "Role"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Make table cells not editable
+            }
+        };
+
+        table = new JTable(model);
+        scrollPane.setViewportView(table);
+
+        JLabel lblUsername = new JLabel("Username:");
+        lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblUsername.setBounds(700, 50, 80, 25);
+        contentPane.add(lblUsername);
+
+        txtUsername = new JTextField();
+        txtUsername.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        txtUsername.setBounds(780, 50, 150, 25);
+        contentPane.add(txtUsername);
+
+        JLabel lblEmail = new JLabel("Email:");
+        lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblEmail.setBounds(700, 100, 80, 25);
+        contentPane.add(lblEmail);
+
+        txtEmail = new JTextField();
+        txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        txtEmail.setBounds(780, 100, 150, 25);
+        contentPane.add(txtEmail);
+
+        JLabel lblPassword = new JLabel("Password:");
+        lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblPassword.setBounds(700, 150, 80, 25);
+        contentPane.add(lblPassword);
+
+        txtPassword = new JTextField();
+        txtPassword.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        txtPassword.setBounds(780, 150, 150, 25);
+        contentPane.add(txtPassword);
+
+        JLabel lblRole = new JLabel("Role:");
+        lblRole.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblRole.setBounds(700, 200, 80, 25);
+        contentPane.add(lblRole);
+
+        comboBoxRole = new JComboBox<>(new String[]{"Admin", "User", "Guest"});
+        comboBoxRole.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        comboBoxRole.setBounds(780, 200, 150, 25);
+        contentPane.add(comboBoxRole);
+
+        btnAdd = new JButton("Add User");
+        btnAdd.setBounds(700, 250, 100, 30);
+        contentPane.add(btnAdd);
+
+        btnUpdate = new JButton("Update User");
+        btnUpdate.setBounds(830, 250, 100, 30);
+        contentPane.add(btnUpdate);
+
+        btnRemove = new JButton("Remove User");
+        btnRemove.setBounds(700, 300, 100, 30);
+        contentPane.add(btnRemove);
+
+        btnRestore = new JButton("Restore User");
+        btnRestore.setBounds(830, 300, 100, 30);
+        contentPane.add(btnRestore);
+
+        btnAdd.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String username = txtUsername.getText();
+                String email = txtEmail.getText();
+                String password = txtPassword.getText();
+                String role = comboBoxRole.getSelectedItem().toString();
+                if (!username.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
+                    int id = model.getRowCount() + 1;
+                    Object[] row = new Object[]{id, username, email, role};
+                    model.addRow(row);
+                    txtUsername.setText("");
+                    txtEmail.setText("");
+                    txtPassword.setText("");
+                }
+            }
+        });
+
+        btnUpdate.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (selectedRowIndex != -1) {
+                    String username = txtUsername.getText();
+                    String email = txtEmail.getText();
+                    String role = comboBoxRole.getSelectedItem().toString();
+                    if (!username.isEmpty() && !email.isEmpty()) {
+                        model.setValueAt(username, selectedRowIndex, 1);
+                        model.setValueAt(email, selectedRowIndex, 2);
+                        model.setValueAt(role, selectedRowIndex, 3);
+                        txtUsername.setText("");
+                        txtEmail.setText("");
+                        selectedRowIndex = -1;
+                    }
+                }
+            }
+        });
+
+        btnRemove.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = table.getSelectedRow();
+                if (selectedRow != -1) {
+                    Object[] removedRowData = new Object[table.getColumnCount()];
+                    for (int i = 0; i < table.getColumnCount(); i++) {
+                        removedRowData[i] = table.getValueAt(selectedRow, i);
+                    }
+                    removedRows.add(removedRowData);
+                    model.removeRow(selectedRow);
+                }
+            }
+        });
+
+        btnRestore.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (!removedRows.isEmpty()) {
+                    Object[] lastRemovedRow = removedRows.remove(removedRows.size() - 1);
+                    model.addRow(lastRemovedRow);
+                }
+            }
+        });
+
+        table.getSelectionModel().addListSelectionListener(event -> {
+            if (!event.getValueIsAdjusting() && table.getSelectedRow() != -1) {
+                selectedRowIndex = table.getSelectedRow();
+                txtUsername.setText(table.getValueAt(selectedRowIndex, 1).toString());
+                txtEmail.setText(table.getValueAt(selectedRowIndex, 2).toString());
+                comboBoxRole.setSelectedItem(table.getValueAt(selectedRowIndex, 3).toString());
+            }
+        });
+    }
+}

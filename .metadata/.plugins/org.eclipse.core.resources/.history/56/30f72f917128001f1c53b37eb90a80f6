@@ -1,0 +1,189 @@
+package kape_System;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.event.*;
+import java.awt.Font;
+
+@SuppressWarnings("unused")
+public class product_page extends JFrame {
+
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private final JLabel lblBackground = new JLabel("image");
+
+    private DefaultListModel<String> receiptModel;
+    private JTextField textField;
+    private JLabel lblPaymentDetails;
+
+    private String enteredText = "";
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    product_page frame = new product_page();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+    private double calculateTotal() {
+        double total = 0.0;
+        for (int i = 0; i < receiptModel.size(); i++) {
+            double itemValue = Double.parseDouble(receiptModel.getElementAt(i));
+            total += itemValue;
+        }
+        return total;
+    }
+
+    /**
+     * Create the frame.
+     */
+    public product_page() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 1021, 719);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+ 
+		
+		
+		JLabel lblBackground = new JLabel();
+        lblBackground.setBounds(-771, -92, 1958, 822);
+        lblBackground.setIcon(new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_System\\product.png"));
+
+        JLabel lblTotal = new JLabel("Total: ");
+        lblTotal.setOpaque(true);
+        lblTotal.setBackground(new Color(255, 255, 255));
+        lblTotal.setFont(new Font("Tahoma", Font.BOLD, 20));
+        lblTotal.setBounds(583, 276, 205, 43);
+
+        JComboBox<String> comboBox = new JComboBox<>();
+        comboBox.setModel(new DefaultComboBoxModel(new String[] {"GCASH", "PAYMAYA", "CREDIT CARD", "CASH ON DELIVERY"}));
+        comboBox.setBounds(583, 359, 205, 28);
+        comboBox.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    String selectedOption = (String) comboBox.getSelectedItem();
+                    if (selectedOption.equals("CREDIT CARD")) {
+                        lblPaymentDetails.setText("Enter Credit Card No.");
+                        lblPaymentDetails.setVisible(true);
+                        textField.setVisible(true);
+                        textField.setText(enteredText);
+                    } else if (selectedOption.equals("GCASH")) {
+                        lblPaymentDetails.setText("Enter GCASH No.");
+                        lblPaymentDetails.setVisible(true);
+                        textField.setVisible(true);
+                        textField.setText(enteredText);
+                    } else if (selectedOption.equals("PAYMAYA")) {
+                        lblPaymentDetails.setText("Enter Paymaya No.");
+                        lblPaymentDetails.setVisible(true);
+                        textField.setVisible(true);
+                        textField.setText(enteredText);
+                    } else {
+                        lblPaymentDetails.setVisible(false);
+                        textField.setVisible(false);
+                        textField.setText("");
+                        enteredText = ""; 
+                    }
+                }
+            }
+        });
+
+        textField = new JTextField();
+        textField.setBounds(519, 376, 205, 19);
+        textField.setColumns(10);
+        textField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                enteredText = textField.getText();
+            }
+        });
+
+        JButton btnPayment = new JButton("Proceed to payment");
+        btnPayment.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int option = JOptionPane.showConfirmDialog(contentPane,"Are you sure you want to proceed with the payment?", "Confirm Payment", JOptionPane.YES_NO_OPTION);
+                if (option == JOptionPane.YES_OPTION) {
+                    String paymentMethod = (String) comboBox.getSelectedItem();
+                    String[] receiptContent = new String[receiptModel.size()];
+                    for (int i = 0; i < receiptModel.size(); i++) {
+                        receiptContent[i] = receiptModel.getElementAt(i);
+                    }
+                    reciepts_return_page.displayRecieptsReturnPage(receiptContent);
+                    dispose();
+                }
+            }
+        });
+
+        btnPayment.setBounds(444, 486, 205, 43);
+        btnPayment.setFocusable(false);
+
+        JButton btnAdd = new JButton("Add Product");
+        btnAdd.setBounds(583, 139, 136, 21);
+        btnAdd.setFocusable(false);
+
+        JButton btnRemoveProduct = new JButton("Remove Product");
+        btnRemoveProduct.setBounds(583, 170, 136, 21);
+        btnRemoveProduct.setFocusable(false);
+
+        JButton btnRemoveAll = new JButton("Remove All");
+        btnRemoveAll.setBounds(631, 195, 85, 21);
+        btnRemoveAll.setFocusable(false);
+
+        JButton btnRestore = new JButton("Restore ");
+        btnRestore.setBounds(583, 214, 136, 21);
+        btnRestore.setFocusable(false);
+
+        JButton btnRestoreAll = new JButton("Restore All");
+        btnRestoreAll.setFocusable(false);
+        btnRestoreAll.setBounds(583, 245, 136, 21);
+
+        JLabel lblOptionPayment = new JLabel("Payment Option:");
+        lblOptionPayment.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        lblOptionPayment.setBounds(583, 329, 118, 13);
+
+        lblPaymentDetails = new JLabel("Enter Credit Card No.");
+        lblPaymentDetails.setBounds(583, 397, 136, 13);
+
+        textField = new JTextField();
+        textField.setBounds(583, 420, 205, 19);
+        textField.setColumns(10);
+
+        receiptModel = new DefaultListModel<>();
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(211, 120, 353, 343);
+        JList<String> list = new JList<>(receiptModel);
+        scrollPane.setViewportView(list);
+        
+        
+
+        contentPane.add(lblTotal);
+        contentPane.add(comboBox);
+        contentPane.add(btnAdd);
+        contentPane.add(btnRemoveProduct);
+        contentPane.add(btnRestore);
+        contentPane.add(btnRestoreAll);
+        contentPane.add(lblOptionPayment);
+        contentPane.add(lblPaymentDetails);
+        contentPane.add(textField);
+        contentPane.add(btnPayment);
+        contentPane.add(scrollPane);
+        contentPane.add(lblBackground);
+        
+
+        lblPaymentDetails.setVisible(false);
+        textField.setVisible(false);
+    }
+}

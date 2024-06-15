@@ -1,0 +1,214 @@
+package kape_System;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+import java.awt.Font;
+import java.awt.Image;
+
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
+public class contact_page extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JTextField textField_1;
+	private JLabel contactUsLabel;
+
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					contact_page frame = new contact_page();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public contact_page() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(380, 100, 700, 400);
+		
+		getContentPane().setLayout(new BorderLayout(0, 0));
+		
+        JMenuBar menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+
+        JMenu mmMenu = new JMenu("Menu");
+        menuBar.add(mmMenu);
+
+        JMenuItem mtnmAccount = new JMenuItem("Account");
+        ImageIcon accountIcon = new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_system_admin\\account.png");
+        Image accountImg = accountIcon.getImage();
+        Image newAccountImg = accountImg.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+        accountIcon = new ImageIcon(newAccountImg);
+        mtnmAccount.setIcon(accountIcon);
+        mmMenu.add(mtnmAccount);
+
+        JMenuItem mntmSettings = new JMenuItem("Settings");
+        ImageIcon settingsIcon = new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_system_admin\\settings.png");
+        Image settingsImg = settingsIcon.getImage();
+        Image newSettingsImg = settingsImg.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+        settingsIcon = new ImageIcon(newSettingsImg);
+        mntmSettings.setIcon(settingsIcon);
+        mmMenu.add(mntmSettings);
+
+        JMenuItem mntmLogout = new JMenuItem("Logout");
+        ImageIcon logoutIcon = new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_system_admin\\logout.png");
+        Image logoutImg = logoutIcon.getImage();
+        Image newLogoutImg = logoutImg.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+        logoutIcon = new ImageIcon(newLogoutImg);
+        mntmLogout.setIcon(logoutIcon);
+        mmMenu.add(mntmLogout);
+
+        mntmLogout.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                login_page login = new login_page();
+                login.setVisible(true);
+            }
+        });
+
+        JMenu mnPage = new JMenu("Page");
+        menuBar.add(mnPage);
+
+        JMenuItem mntmHome = new JMenuItem("Home");
+        mntmHome.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                home_page homePage = new home_page();
+                homePage.setVisible(true);
+                dispose();
+            }
+        });
+        mnPage.add(mntmHome);
+
+        JMenuItem mntmMenu = new JMenuItem("Menu");
+        mntmMenu.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                menu_page menuPage = new menu_page();
+                menuPage.setVisible(true);
+                dispose();
+            }
+        });
+        mnPage.add(mntmMenu);
+
+        JMenuItem mntmCart = new JMenuItem("Cart");
+        mntmCart.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	cart_page cartPage = new cart_page(null);
+                cartPage.setVisible(true);
+                dispose();
+            }
+        });
+        mnPage.add(mntmCart);
+        
+		JPanel panel = new JPanel();	
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setLayout(null);
+		getContentPane().add(panel, BorderLayout.CENTER);
+		
+		contactUsLabel = new JLabel("Contact Us");
+		contactUsLabel.setBounds(10, 39, 161, 50);
+		contactUsLabel.setFont(new Font("Arial", Font.PLAIN, 28));
+		panel.add(contactUsLabel);
+		
+		JLabel lblNewLabel = new JLabel("Our mailing address is kapeDeCabuyao@gmail.com");
+		lblNewLabel.setBounds(10, 88, 285, 20);
+		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 11));
+		panel.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Katapatan homes");
+		lblNewLabel_1.setBounds(10, 118, 161, 20);
+		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 11));
+		panel.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("Cabuyao City");
+		lblNewLabel_2.setBounds(99, 121, 72, 14);
+		lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 11));
+		panel.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("Phone: #09946902381");
+		lblNewLabel_3.setBounds(10, 148, 161, 14);
+		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 11));
+		panel.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4_1 = new JLabel("E-mail:");
+		lblNewLabel_4_1.setBounds(313, 90, 67, 14);
+		lblNewLabel_4_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		panel.add(lblNewLabel_4_1);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(390, 90, 243, 30);
+		textField_1.setColumns(10);
+		panel.add(textField_1);
+		
+		JLabel lblNewLabel_5 = new JLabel("Feedback");
+		lblNewLabel_5.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblNewLabel_5.setBounds(313, 140, 67, 14);
+		panel.add(lblNewLabel_5);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
+		
+		JScrollPane scrollPane = new JScrollPane(textArea);
+		scrollPane.setBounds(390, 140, 243, 110);
+		panel.add(scrollPane);
+
+		JButton sendButton = new JButton("Send");
+		sendButton.setBounds(538, 260, 95, 30);
+		panel.add(sendButton);
+
+		sendButton.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			String email = textField_1.getText();
+			String message = textArea.getText();
+			if (email.isEmpty() && message.isEmpty()) {
+				JOptionPane.showMessageDialog(panel, "You need to input something", "Warning", JOptionPane.WARNING_MESSAGE);
+			} else if (email.isEmpty()) {
+				JOptionPane.showMessageDialog(panel, "Enter your email first", "Warning", JOptionPane.WARNING_MESSAGE);
+			} else if (message.isEmpty()) {
+				JOptionPane.showMessageDialog(panel, "Enter your message", "Warning", JOptionPane.WARNING_MESSAGE);
+			} else {
+				System.out.println("Email: " + email);
+				System.out.println("Message: " + message);
+				textField_1.setText("");
+				textArea.setText("");
+				JOptionPane.showMessageDialog(panel, "Your feedback has been sent to our team", "Info", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+		});
+
+		textField_1.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			textArea.requestFocus();
+		}
+		});
+	}
+}
+

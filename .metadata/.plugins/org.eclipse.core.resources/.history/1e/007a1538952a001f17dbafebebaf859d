@@ -1,0 +1,30 @@
+package kape_System;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class s {
+    public static void main(String[] args) {
+        // Create a frame
+        JFrame frame = new JFrame("Scrollable Panel Example");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 300);
+
+        // Create a panel with a lot of content
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        for (int i = 0; i < 50; i++) {
+            panel.add(new JLabel("Label " + i));
+        }
+
+        // Wrap the panel in a JScrollPane
+        JScrollPane scrollPane = new JScrollPane(panel);
+
+        // Add the JScrollPane to the frame
+        frame.add(scrollPane);
+
+        // Display the frame
+        frame.setVisible(true);
+    }
+}

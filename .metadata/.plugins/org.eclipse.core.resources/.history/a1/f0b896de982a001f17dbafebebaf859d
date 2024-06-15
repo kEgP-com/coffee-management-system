@@ -1,0 +1,66 @@
+package kape_System;
+
+import java.awt.EventQueue;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
+public class reciepts_return_page extends JFrame {
+
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+
+    public reciepts_return_page(String[] receiptContent) {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(250, 30, 652, 387);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+        
+        JLabel lblBackground = new JLabel();
+        lblBackground.setBounds(0, 0, 638, 361);
+        ImageIcon icon = new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_System\\background_kape.png");
+        lblBackground.setIcon(icon);
+        contentPane.add(lblBackground); 
+        
+        JList<String> receiptList = new JList<>(receiptContent);
+        JScrollPane scrollPane = new JScrollPane(receiptList);
+        scrollPane.setBounds(119, 48, 414, 200);
+        contentPane.add(scrollPane);
+
+        JButton btnCancelOrder = new JButton("Cancel Order");
+        btnCancelOrder.addActionListener(e -> {
+            
+        });
+        btnCancelOrder.setBounds(334, 258, 150, 25);
+        contentPane.add(btnCancelOrder);
+        btnCancelOrder.setFocusable(false);
+        
+        JButton btnDone = new JButton("Done");
+        btnDone.setBounds(163, 258, 150, 25);
+        btnDone.setFocusable(false);
+        btnDone.addActionListener(e -> {
+            home_page homePage = new home_page();
+            homePage.setVisible(true);
+            dispose(); 
+        });
+        contentPane.add(btnDone);
+    }
+
+    public static void displayRecieptsReturnPage(String[] receiptContent) {
+        EventQueue.invokeLater(() -> {
+            try {
+                reciepts_return_page frame = new reciepts_return_page(receiptContent);
+                frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public static void main(String[] args) {
+        // Sample data for demonstration
+        String[] receiptContent = {"Item 1: $10", "Item 2: $15", "Item 3: $7"};
+        displayRecieptsReturnPage(receiptContent);
+    }
+}

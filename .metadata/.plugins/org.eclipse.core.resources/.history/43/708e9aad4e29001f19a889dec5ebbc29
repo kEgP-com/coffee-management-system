@@ -1,0 +1,90 @@
+package kape_System;
+
+import java.awt.EventQueue;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
+
+public class receipts_return_page extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					receipts_return_page frame = new receipts_return_page();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+public reciept_return_page(String[] receiptContent) {
+    	
+    	
+    	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(250, 30, 652, 387);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+        
+        JLabel lblBackground = new JLabel();
+        lblBackground.setBounds(0, 0, 638, 340);
+        ImageIcon icon = new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_System\\background_kape.png");
+        lblBackground.setIcon(icon);
+
+        JList<String> receiptList = new JList<>(receiptContent);
+        JScrollPane scrollPane = new JScrollPane(receiptList);
+        scrollPane.setBounds(119, 48, 414, 200);
+        contentPane.add(scrollPane);
+
+        JButton btnCancelOrder = new JButton("Cancel Order");
+        btnCancelOrder.addActionListener(e -> {
+            JOptionPane.showMessageDialog(contentPane, "Order Cancelled!");
+            dispose();
+        });
+        btnCancelOrder.setBounds(334, 258, 150, 25);
+        contentPane.add(btnCancelOrder);
+        btnCancelOrder.setFocusable(false);
+        
+        JButton btnDone = new JButton("Done");
+        btnDone.setBounds(163, 258, 150, 25);
+        btnDone.setFocusable(false);
+        btnDone.addActionListener(e -> {
+            home_page homePage = new home_page();
+            homePage.setVisible(true);
+            dispose(); 
+        });
+        contentPane.add(btnDone);
+        contentPane.add(lblBackground);
+    }
+
+    public static void displayRecieptsReturnPage(String[] receiptContent) {
+        EventQueue.invokeLater(() -> {
+            try {
+                reciepts_return_page frame = new reciepts_return_page(receiptContent);
+                frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+}

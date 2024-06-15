@@ -1,0 +1,130 @@
+package kape_system_admin;
+
+import java.awt.EventQueue;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
+public class product_add_page extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JTable table;
+	private JButton btnAdd;
+	private JButton btnRemoveItem;
+	private JButton btnRestore;
+	private JTextField txtName;
+	private JTextField txtPrice;
+	private JTextField txtSize;
+	private DefaultTableModel model;
+	private List<Object[]> removedRows = new ArrayList<>();
+	private JLabel lblNumberOfProducts;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					product_add_page frame = new product_add_page();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public product_add_page() {
+		getContentPane().setLayout(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1043, 770);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(186, 53, 480, 598);
+		contentPane.add(scrollPane);
+
+		model = new DefaultTableModel(new Object[]{"No.", "Type", "Name", "Price", "Size"}, 0);
+		table = new JTable(model);
+		scrollPane.setViewportView(table);
+
+		btnAdd = new JButton("ADD ITEM");
+		btnAdd.setBounds(688, 374, 135, 41);
+		contentPane.add(btnAdd);
+
+		btnRemoveItem = new JButton("REMOVE ITEM");
+		btnRemoveItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int selectedRow = table.getSelectedRow();
+				if (selectedRow != -1) {
+					Object[] removedRowData = new Object[table.getColumnCount()];
+					for (int i = 0; i < table.getColumnCount(); i++) {
+						removedRowData[i] = table.getValueAt(selectedRow, i);
+					}
+					removedRows.add(removedRowData);
+					model.removeRow(selectedRow);
+					lblNumberOfProducts.setText("Number of Products: " + model.getRowCount());
+				}
+			}
+		});
+		btnRemoveItem.setBounds(688, 425, 135, 41);
+		contentPane.add(btnRemoveItem);
+
+		btnRestore = new JButton("RESTORE");
+		btnRestore.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (!removedRows.isEmpty()) {
+					Object[] lastRemovedRow = removedRows.remove(removedRows.size() - 1);
+					model.addRow(lastRemovedRow);
+					lblNumberOfProducts.setText("Number of Products: " + model.getRowCount());
+				}
+			}
+		});
+		btnRestore.setBounds(688, 578, 135, 41);
+		contentPane.add(btnRestore);
+
+		JLabel lblNewLabel = new JLabel("Type:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel.setBounds(688, 122, 46, 41);
+		contentPane.add(lblNewLabel);
+
+		JLabel lblPrice = new JLabel("Price:");
+		lblPrice.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblPrice.setBounds(688, 232, 46, 41);
+		contentPane.add(lblPrice);
+
+		JLabel lblName = new JLabel("Name:");
+		lblName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblName.setBounds(688, 181, 46, 41);
+		contentPane.add(lblName);
+
+		JLabel lblSize = new JLabel("Size:");
+		lblSize.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblSize.setBounds(688, 283, 46, 41);
+		contentPane.add(lblSize);
+
+		JComboBox<String> comboBox = new JComboBox<>();
+		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		comboBox.setModel(new DefaultComboBoxModel<>(new String[]{"Hot", "Cold"}));
+		comboBox.setBounds(756, 127, 69, 31);
+		contentPane.add(comboBox);
+
+		JButton btnRestoreAll = new JButton("RESTORE ALL");
+		btnRestoreAll.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e
+
+

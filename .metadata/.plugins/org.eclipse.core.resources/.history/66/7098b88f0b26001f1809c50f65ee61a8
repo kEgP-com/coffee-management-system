@@ -1,0 +1,182 @@
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.event.*;
+import java.awt.Font;
+
+@SuppressWarnings("unused")
+public class product_page extends JFrame {
+
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private final JLabel lblBackground = new JLabel("image");
+
+    private DefaultListModel<String> receiptModel;
+    private JTextField textField;
+    private JLabel lblPaymentDetails;
+
+    // Variable to store the entered text in the text field
+    private String enteredText = "";
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    product_page frame = new product_page();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the frame.
+     */
+    public product_page() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 905, 575);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        JLabel lblBackground = new JLabel();
+        lblBackground.setBounds(0, 0, 891, 538);
+        ImageIcon icon = new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_System\\background_kape.png");
+        lblBackground.setIcon(icon);
+
+        JLabel lblTotal = new JLabel("Total: ");
+        lblTotal.setOpaque(true);
+        lblTotal.setBackground(new Color(255, 255, 255));
+        lblTotal.setFont(new Font("Tahoma", Font.BOLD, 20));
+        lblTotal.setBounds(519, 232, 205, 43);
+
+        JComboBox<String> comboBox = new JComboBox<>();
+        comboBox.setModel(new DefaultComboBoxModel(new String[] {"GCASH", "PAYMAYA", "CREDIT CARD", "CASH ON DELIVERY"}));
+        comboBox.setBounds(519, 315, 205, 28);
+        comboBox.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    String selectedOption = (String) comboBox.getSelectedItem();
+                    if (selectedOption.equals("CREDIT CARD")) {
+                        lblPaymentDetails.setText("Enter Credit Card No.");
+                        lblPaymentDetails.setVisible(true);
+                        textField.setVisible(true);
+                        // Restore the entered text in the text field
+                        textField.setText(enteredText);
+                    } else if (selectedOption.equals("GCASH")) {
+                        lblPaymentDetails.setText("Enter GCASH No.");
+                        lblPaymentDetails.setVisible(true);
+                        textField.setVisible(true);
+                        textField.setText(enteredText);
+                    } else if (selectedOption.equals("PAYMAYA")) {
+                        lblPaymentDetails.setText("Enter Paymaya No.");
+                        lblPaymentDetails.setVisible(true);
+                        textField.setVisible(true);
+                        textField.setText(enteredText);
+                    } else {
+                        lblPaymentDetails.setVisible(false);
+                        textField.setVisible(false);
+                        // Clear entered text when option is not credit card, GCASH, or PAYMAYA
+                        textField.setText("");
+                        enteredText = ""; // Reset entered text
+                    }
+                }
+            }
+        });
+
+        // Add focus listener to the text field
+        textField = new JTextField();
+        textField.setBounds(519, 376, 205, 19);
+        textField.setColumns(10);
+        textField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                // Store the entered text when the text field loses focus
+                enteredText = textField.getText();
+            }
+        });
+
+        JButton btnPayment = new JButton("Proceed to payment");
+        btnPayment.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Show confirm dialog
+                int option = JOptionPane.showConfirmDialog(contentPane,
+                        "Are you sure you want to proceed with the payment?", "Confirm Payment", JOptionPane.YES_NO_OPTION);
+
+                // If user confirms payment
+                if (option == JOptionPane.YES_OPTION) {
+                    // Process payment (e.g., calculate total, update inventory, etc.)
+                    // Here you would update your receipt information, for now, let's assume a simple message
+                    String receiptMessage = "Payment processed. Total: " + comboBox.getSelectedItem();
+                    // Display receipt in dialog
+                    JOptionPane.showMessageDialog(contentPane, receiptMessage, "Receipt", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });
+        btnPayment.setBounds(380, 442, 205, 43);
+        btnPayment.setFocusable(false);
+
+        JButton btnAdd = new JButton("Add Product");
+        btnAdd.setBounds(519, 95, 136, 21);
+        btnAdd.setFocusable(false);
+
+        JButton btnRemoveProduct = new JButton("Remove Product");
+        btnRemoveProduct.setBounds(519, 126, 136, 21);
+        btnRemoveProduct.setFocusable(false);
+
+        JButton btnRemoveAll = new JButton("Remove All");
+        btnRemoveAll.setBounds(631, 195, 85, 21);
+        btnRemoveAll.setFocusable(false);
+
+        JButton btnRestore = new JButton("Restore ");
+        btnRestore.setBounds(519, 170, 136, 21);
+        btnRestore.setFocusable(false);
+
+        JButton btnRestoreAll = new JButton("Restore All");
+        btnRestoreAll.setFocusable(false);
+        btnRestoreAll.setBounds(519, 201, 136, 21);
+
+        JLabel lblOptionPayment = new JLabel("Payment Option:");
+        lblOptionPayment.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        lblOptionPayment.setBounds(519, 285, 118, 13);
+
+        lblPaymentDetails = new JLabel("Enter Credit Card No.");
+        lblPaymentDetails.setBounds(519, 353, 136, 13);
+
+        textField = new JTextField();
+        textField.setBounds(519, 376, 205, 19);
+        textField.setColumns(10);
+
+        receiptModel = new DefaultListModel<>();
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(147, 76, 353, 343);
+        JList<String> list = new JList<>(receiptModel);
+        scrollPane.setViewportView(list);
+
+        contentPane.add(lblTotal);
+        contentPane.add(comboBox);
+        contentPane.add(btnAdd);
+        contentPane.add(btnRemoveProduct);
+        contentPane.add(btnRestore);
+        contentPane.add(btnRestoreAll);
+        contentPane.add(lblOptionPayment);
+        contentPane.add(lblPaymentDetails);
+        contentPane.add(textField);
+        contentPane.add(btnPayment);
+        contentPane.add(scrollPane);
+        contentPane.add(lblBackground);
+        
+        // Initialize visibility
+        lblPaymentDetails.setVisible(false);
+        textField.setVisible(false);
+    }
+}

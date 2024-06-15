@@ -1,0 +1,253 @@
+package kape_System;
+
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+import java.awt.Color;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.awt.Image;
+
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
+public class menu_page extends JFrame {
+
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private List<String> cartItems = new ArrayList<>();
+    private JLabel lblNotification;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    menu_page frame = new menu_page();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the frame.
+     */
+    public menu_page() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 719, 611);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+        
+        JMenuBar menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+
+        JMenu mmMenu = new JMenu("Menu");
+        menuBar.add(mmMenu);
+
+        JMenuItem mtnmAccount = new JMenuItem("Account");
+        ImageIcon accountIcon = new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_system_admin\\account.png");
+        Image accountImg = accountIcon.getImage();
+        Image newAccountImg = accountImg.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+        accountIcon = new ImageIcon(newAccountImg);
+        mtnmAccount.setIcon(accountIcon);
+        mmMenu.add(mtnmAccount);
+
+        JMenuItem mntmSettings = new JMenuItem("Settings");
+        ImageIcon settingsIcon = new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_system_admin\\settings.png");
+        Image settingsImg = settingsIcon.getImage();
+        Image newSettingsImg = settingsImg.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+        settingsIcon = new ImageIcon(newSettingsImg);
+        mntmSettings.setIcon(settingsIcon);
+        mmMenu.add(mntmSettings);
+
+        JMenuItem mntmLogout = new JMenuItem("Logout");
+        ImageIcon logoutIcon = new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_system_admin\\logout.png");
+        Image logoutImg = logoutIcon.getImage();
+        Image newLogoutImg = logoutImg.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+        logoutIcon = new ImageIcon(newLogoutImg);
+        mntmLogout.setIcon(logoutIcon);
+        mmMenu.add(mntmLogout);
+
+        mntmLogout.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                login_page login = new login_page();
+                login.setVisible(true);
+            }
+        });
+
+        JMenu mnPage = new JMenu("Page");
+        menuBar.add(mnPage);
+
+        JMenuItem mntmHome = new JMenuItem("Home");
+        mntmHome.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                home_page homePage = new home_page();
+                homePage.setVisible(true);
+                dispose();
+            }
+        });
+        mnPage.add(mntmHome);
+
+        JMenuItem mntmMenu = new JMenuItem("Menu");
+        mntmMenu.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                menu_page menuPage = new menu_page();
+                menuPage.setVisible(true);
+                dispose();
+            }
+        });
+        mnPage.add(mntmMenu);
+
+        JMenuItem mntmCart = new JMenuItem("Cart");
+        mntmCart.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	cart_page cartPage = new cart_page(null);
+                cartPage.setVisible(true);
+                dispose();
+            }
+        });
+        mnPage.add(mntmCart);
+        
+        JMenuItem mntmContact = new JMenuItem("Contact");
+        mntmContact.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		contact_page contactPage = new contact_page();
+                contactPage.setVisible(true);
+                dispose();
+        	}
+        });
+        mnPage.add(mntmContact);
+        
+        JLabel title2 = new JLabel("Hot Coffee");
+        title2.setBounds(212, 63, 257, 37);
+        contentPane.add(title2);
+        title2.setVerticalAlignment(SwingConstants.BOTTOM);
+        title2.setHorizontalTextPosition(SwingConstants.LEFT);
+        title2.setHorizontalAlignment(SwingConstants.CENTER);
+        title2.setForeground(Color.BLACK);
+        title2.setFont(new Font("Palatino Linotype", Font.BOLD | Font.ITALIC, 27));
+        title2.setBorder(null);
+
+        createCoffeeSection(contentPane, "1. Americano Coffee", 131, 0);
+        createCoffeeSection(contentPane, "2. Cappuccino", 155, 1);
+        createCoffeeSection(contentPane, "3. Dark Choco", 181, 2);
+        createCoffeeSection(contentPane, "4. Caramel Macchiato", 206, 3);
+        createCoffeeSection(contentPane, "5. Latte", 230, 4);
+
+        JLabel title1 = new JLabel("Cold Coffee");
+        title1.setBounds(212, 292, 257, 37);
+        contentPane.add(title1);
+        title1.setVerticalAlignment(SwingConstants.BOTTOM);
+        title1.setHorizontalTextPosition(SwingConstants.LEFT);
+        title1.setHorizontalAlignment(SwingConstants.CENTER);
+        title1.setForeground(Color.BLACK);
+        title1.setFont(new Font("Palatino Linotype", Font.BOLD | Font.ITALIC, 27));
+        title1.setBorder(null);
+
+        createCoffeeSection(contentPane, "1. Iced Americano", 364, 5);
+        createCoffeeSection(contentPane, "2. Iced Vanilla Latte", 388, 6);
+        createCoffeeSection(contentPane, "3. Iced Mocha", 414, 7);
+        createCoffeeSection(contentPane, "4. Iced Macchiato", 439, 8);
+        createCoffeeSection(contentPane, "5. Iced Hazelnut Latte", 463, 9);
+
+        JButton btnViewCart = new JButton("VIEW CART");
+        btnViewCart.setBounds(530, 500, 108, 23);
+        contentPane.add(btnViewCart);
+        btnViewCart.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cart_page cart = new cart_page(cartItems);
+                cart.setVisible(true);
+            }
+        });
+
+        lblNotification = new JLabel("");
+        lblNotification.setBounds(200, 530, 300, 25);
+        lblNotification.setFont(new Font("Tahoma", Font.BOLD, 12));
+        lblNotification.setForeground(Color.RED);
+        lblNotification.setHorizontalAlignment(SwingConstants.CENTER);
+        contentPane.add(lblNotification);
+    }
+
+    private void createCoffeeSection(JPanel panel, String coffeeName, int yPosition, int index) {
+        JLabel productLabel = new JLabel(coffeeName);
+        productLabel.setBounds(151, yPosition, 156, 25);
+        panel.add(productLabel);
+        productLabel.setForeground(Color.BLACK);
+        productLabel.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+
+        JLabel priceLabel = new JLabel("P39");
+        priceLabel.setBounds(317, yPosition, 54, 25);
+        panel.add(priceLabel);
+        priceLabel.setForeground(Color.BLACK);
+        priceLabel.setFont(new Font("Sitka Heading", Font.BOLD, 14));
+
+        JComboBox<String> sizeComboBox = new JComboBox<>();
+        sizeComboBox.setBounds(375, yPosition, 81, 22);
+        panel.add(sizeComboBox);
+        sizeComboBox.setModel(new DefaultComboBoxModel<>(new String[]{"Small", "Medium", "Large"}));
+        sizeComboBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String selectedSize = (String) sizeComboBox.getSelectedItem();
+                switch (selectedSize) {
+                    case "Small":
+                        priceLabel.setText("P" + 39);
+                        break;
+                    case "Medium":
+                        priceLabel.setText("P" + 49);
+                        break;
+                    case "Large":
+                        priceLabel.setText("P" + 59);
+                        break;
+                }
+            }
+        });
+
+        JLabel lblSize = new JLabel("Size");
+        lblSize.setBounds(403, yPosition - 24, 46, 14);
+        panel.add(lblSize);
+        lblSize.setForeground(Color.BLACK);
+        lblSize.setFont(new Font("Tahoma", Font.BOLD, 11));
+
+        JSpinner spinner = new JSpinner(new SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1));
+        spinner.setBounds(477, yPosition, 30, 20);
+        panel.add(spinner);
+
+        JButton buyButton = new JButton("ADD");
+        buyButton.setBounds(530, 131, 108, 23);
+        panel.add(buyButton);
+        buyButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                addToCart(coffeeName, priceLabel.getText(), sizeComboBox.getSelectedItem().toString(), spinner.getValue().toString());
+                lblNotification.setText(coffeeName + " added to cart!");
+            }
+        });
+    }
+
+    private void addToCart(String itemName, String price, String size, String quantity) {
+        String cartItem = itemName + " - " + size + " - " + price + " x " + quantity;
+        cartItems.add(cartItem);
+    }
+}
+

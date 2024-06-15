@@ -1,0 +1,89 @@
+package kape_System;
+
+import java.awt.EventQueue;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.Font;
+
+public class reciepts_return_page extends JFrame {
+
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JProgressBar progressBar;
+    private JLabel lblReceiptDetails;
+
+    public reciepts_return_page(String[] receiptContent) {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(250, 30, 652, 387);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        ImageIcon icon = new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_System\\background_kape.png");
+
+        JList<String> receiptList = new JList<>(receiptContent);
+        JScrollPane scrollPane = new JScrollPane(receiptList);
+        scrollPane.setBounds(119, 48, 414, 200);
+        contentPane.add(scrollPane);
+
+        lblReceiptDetails = new JLabel();
+        lblReceiptDetails.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        lblReceiptDetails.setBounds(119, 10, 414, 30);
+        StringBuilder receiptDetails = new StringBuilder("<html>");
+        for (String line : receiptContent) {
+            receiptDetails.append(line).append("<br>");
+        }
+        receiptDetails.append("</html>");
+        lblReceiptDetails.setText(receiptDetails.toString());
+        contentPane.add(lblReceiptDetails);
+
+        progressBar = new JProgressBar();
+        progressBar.setBounds(119, 258, 414, 25);
+        progressBar.setValue(50); // Simulate order being processed
+        progressBar.setStringPainted(true);
+        contentPane.add(progressBar);
+
+        JButton btnCancelOrder = new JButton("Cancel Order");
+        btnCancelOrder.addActionListener(e -> {
+            int option = JOptionPane.showConfirmDialog(contentPane, "Are you sure you want to cancel the order?", "Confirm Cancellation", JOptionPane.YES_NO_OPTION);
+            if (option == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(contentPane, "Canceling order...");
+                dispose(); // Close the receipt page
+            }
+        });
+        btnCancelOrder.setBounds(334, 293, 150, 25);
+        btnCancelOrder.setFocusable(false);
+        contentPane.add(btnCancelOrder);
+
+        JButton btnDone = new JButton("Done");
+        btnDone.setBounds(163, 293, 150, 25);
+        btnDone.setFocusable(false);
+        btnDone.addActionListener(e -> {
+            progressBar.setValue(100); // Simulate order completion
+            JOptionPane.showMessageDialog(contentPane, "Order is complete. Returning to Home.");
+            home_page homePage = new home_page();
+            homePage.setVisible(true);
+            dispose(); // Close the receipt page
+        });
+        contentPane.add(btnDone);
+    }
+
+    public static void displayRecieptsReturnPage(String[] receiptContent) {
+        EventQueue.invokeLater(() -> {
+            try {
+                reciepts_return_page frame = new reciepts_return_page(receiptContent);
+                frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public static void main(String[] args) {
+        // Sample data for demonstration
+        String[] receiptContent = {"Item 1: $10", "Item 2: $15", "Item 3: $7"};
+        displayRecieptsReturnPage(receiptContent);
+    }
+}
+

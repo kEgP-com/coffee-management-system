@@ -1,0 +1,98 @@
+package kape_System;
+
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Font;
+import java.awt.Color;
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import javax.swing.JOptionPane;
+
+public class forgot_password_page extends JFrame {
+
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JTextField emailField;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    forgot_password_page frame = new forgot_password_page();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the frame.
+     */
+    public forgot_password_page() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(455, 100, 656, 494);
+        contentPane = new JPanel();
+        contentPane.setBackground(Color.WHITE);
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        JLabel lblBackground = new JLabel();
+        lblBackground.setBounds(-11, 0, 911, 542);
+        ImageIcon icon = new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_System\\background_kape.png");
+        lblBackground.setIcon(icon);
+
+        JLabel lblTitle = new JLabel("Forgot Password?");
+        lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+        lblTitle.setForeground(new Color(160, 82, 45));
+        lblTitle.setFont(new Font("Brush Script MT", Font.BOLD, 20));
+        lblTitle.setBounds(208, 69, 235, 40);
+
+        JLabel lblEmail = new JLabel("Enter your email:");
+        lblEmail.setFont(new Font("Bell MT", Font.PLAIN, 14));
+        lblEmail.setBounds(233, 156, 120, 14);
+
+        emailField = new JTextField();
+        emailField.setColumns(10);
+        emailField.setBounds(233, 181, 190, 25);
+
+        JButton btnSendLink = new JButton("Send Reset Link");
+        btnSendLink.setFont(new Font("Bell MT", Font.PLAIN, 12));
+        btnSendLink.setBounds(233, 220, 190, 30);
+        btnSendLink.setFocusable(false);
+
+        btnSendLink.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String email = emailField.getText();
+                
+                if (email.isEmpty()) {
+                    JOptionPane.showMessageDialog(contentPane, "Please enter your email.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(contentPane, "A reset link has been sent to " + email, "Password Reset", JOptionPane.INFORMATION_MESSAGE);
+                    reset_password_page resetPage = new reset_password_page();
+                    resetPage.setVisible(true);
+                    dispose();
+                }
+            }
+        });
+
+        contentPane.add(lblTitle);
+        contentPane.add(lblEmail);
+        contentPane.add(emailField);
+        contentPane.add(btnSendLink);
+        contentPane.add(lblBackground);
+    }
+}

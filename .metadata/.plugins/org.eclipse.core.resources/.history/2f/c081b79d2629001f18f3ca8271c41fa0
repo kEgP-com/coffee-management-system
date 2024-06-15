@@ -1,0 +1,283 @@
+package kape_system_admin;
+
+import java.awt.EventQueue;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
+public class product_add_page extends JFrame {
+
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JTable table;
+    private JButton btnAdd;
+    private JButton btnRemoveItem;
+    private JButton btnRestore;
+    private JButton btnUpdate;
+    private JTextField txtName;
+    private JTextField txtPrice;
+    private JTextField txtSize;
+    private DefaultTableModel model;
+    private List<Object[]> removedRows = new ArrayList<>();
+    private JLabel lblNumberOfProducts;
+    private JComboBox<String> comboBox;
+    private int selectedRowIndex = -1;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    product_add_page frame = new product_add_page();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the frame.
+     */
+    public product_add_page() {
+        getContentPane().setLayout(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 1043, 770);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, 1319, 22);
+		contentPane.add(menuBar);
+		
+		JMenu mnNewMenu = new JMenu("Menu");
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem mntmAccount = new JMenuItem("Account");
+		mnNewMenu.add(mntmAccount);
+		
+		JMenuItem mntmSettings = new JMenuItem("Settings");
+		mnNewMenu.add(mntmSettings);
+		
+		JMenuItem mntmLogout = new JMenuItem("Logout");
+		mnNewMenu.add(mntmLogout);
+		
+		JMenu mnPage = new JMenu("Page");
+		menuBar.add(mnPage);
+		
+		JMenuItem mntmHome = new JMenuItem("Home");
+		mntmHome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				admin_panel home = new admin_panel();
+				home.setVisible(true);
+				dispose();			
+			}
+		});
+		mnPage.add(mntmHome);
+		
+		JMenuItem mntmUser = new JMenuItem("User");
+		mnPage.add(mntmUser);
+		
+		JMenuItem mntmPayment = new JMenuItem("Payment");
+		mnPage.add(mntmPayment);
+		
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(186, 53, 480, 598);
+        contentPane.add(scrollPane);
+
+        model = new DefaultTableModel(new Object[]{"No.", "Type", "Name", "Price", "Size"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; 
+            }
+        };
+        
+        table = new JTable(model);
+        scrollPane.setViewportView(table);
+
+        btnAdd = new JButton("ADD ITEM");
+        btnAdd.setBounds(690, 406, 135, 41);
+        contentPane.add(btnAdd);
+
+        btnRemoveItem = new JButton("REMOVE ITEM");
+        btnRemoveItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = table.getSelectedRow();
+                if (selectedRow != -1) {
+                    Object[] removedRowData = new Object[table.getColumnCount()];
+                    for (int i = 0; i < table.getColumnCount(); i++) {
+                        removedRowData[i] = table.getValueAt(selectedRow, i);
+                    }
+                    removedRows.add(removedRowData);
+                    model.removeRow(selectedRow);
+                    lblNumberOfProducts.setText("Number of Products: " + model.getRowCount());
+                }
+            }
+        });
+        btnRemoveItem.setBounds(690, 457, 135, 41);
+        contentPane.add(btnRemoveItem);
+
+        btnRestore = new JButton("RESTORE");
+        btnRestore.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (!removedRows.isEmpty()) {
+                    Object[] lastRemovedRow = removedRows.remove(removedRows.size() - 1);
+                    model.addRow(lastRemovedRow);
+                    lblNumberOfProducts.setText("Number of Products: " + model.getRowCount());
+                }
+            }
+        });
+        btnRestore.setBounds(690, 610, 135, 41);
+        contentPane.add(btnRestore);
+
+        JLabel lblNewLabel = new JLabel("Type:");
+        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblNewLabel.setBounds(688, 122, 46, 41);
+        contentPane.add(lblNewLabel);
+
+        JLabel lblPrice = new JLabel("Price:");
+        lblPrice.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblPrice.setBounds(688, 232, 46, 41);
+        contentPane.add(lblPrice);
+
+        JLabel lblName = new JLabel("Name:");
+        lblName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblName.setBounds(688, 181, 46, 41);
+        contentPane.add(lblName);
+
+        JLabel lblSize = new JLabel("Size:");
+        lblSize.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblSize.setBounds(688, 283, 46, 41);
+        contentPane.add(lblSize);
+
+        comboBox = new JComboBox<>();
+        comboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        comboBox.setModel(new DefaultComboBoxModel<>(new String[]{"Hot", "Cold"}));
+        comboBox.setBounds(744, 127, 69, 31);
+        contentPane.add(comboBox);
+
+        JButton btnRestoreAll = new JButton("RESTORE ALL");
+        btnRestoreAll.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                for (Object[] removedRow : removedRows) {
+                    model.addRow(removedRow);
+                }
+                removedRows.clear();
+                lblNumberOfProducts.setText("Number of Products: " + model.getRowCount());
+            }
+        });
+        btnRestoreAll.setBounds(690, 559, 135, 41);
+        contentPane.add(btnRestoreAll);
+
+        lblNumberOfProducts = new JLabel("Number of Products: ");
+        lblNumberOfProducts.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblNumberOfProducts.setBounds(186, 661, 190, 41);
+        contentPane.add(lblNumberOfProducts);
+
+        txtName = new JTextField();
+        txtName.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        txtName.setHorizontalAlignment(SwingConstants.LEFT);
+        txtName.setBounds(744, 188, 121, 31);
+        contentPane.add(txtName);
+        txtName.setColumns(10);
+
+        txtPrice = new JTextField();
+        txtPrice.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        txtPrice.setColumns(10);
+        txtPrice.setBounds(744, 239, 121, 32);
+        contentPane.add(txtPrice);
+
+        txtSize = new JTextField();
+        txtSize.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        txtSize.setColumns(10);
+        txtSize.setBounds(744, 290, 121, 32);
+        contentPane.add(txtSize);
+
+        JButton btnRemoveAll = new JButton("REMOVE ALL");
+        btnRemoveAll.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int rowCount = model.getRowCount();
+                for (int i = rowCount - 1; i >= 0; i--) {
+                    Object[] rowData = new Object[table.getColumnCount()];
+                    for (int j = 0; j < table.getColumnCount(); j++) {
+                        rowData[j] = table.getValueAt(i, j);
+                    }
+                    removedRows.add(rowData);
+                    model.removeRow(i);
+                }
+                lblNumberOfProducts.setText("Number of Products: " + model.getRowCount());
+            }
+        });
+        btnRemoveAll.setBounds(690, 508, 135, 41);
+        contentPane.add(btnRemoveAll);
+
+        btnAdd.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (txtName.getText().isEmpty() || txtPrice.getText().isEmpty() || txtSize.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "All fields must be filled!", "Input Error", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    int rowCount = model.getRowCount();
+                    Object[] rowData = {
+                        rowCount + 1,
+                        comboBox.getSelectedItem().toString(),
+                        txtName.getText(),
+                        txtPrice.getText(),
+                        txtSize.getText()
+                    };
+                    model.addRow(rowData);
+                    lblNumberOfProducts.setText("Number of Products: " + model.getRowCount());
+                    txtName.setText("");
+                    txtPrice.setText("");
+                    txtSize.setText("");
+                }
+            }
+        });
+
+        btnUpdate = new JButton("UPDATE");
+        btnUpdate.setBounds(690, 353, 135, 41);
+        contentPane.add(btnUpdate);
+
+        btnUpdate.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (selectedRowIndex != -1) {
+                    String type = comboBox.getSelectedItem().toString();
+                    String name = txtName.getText();
+                    String price = txtPrice.getText();
+                    String size = txtSize.getText();
+                    if (!name.isEmpty() && !price.isEmpty() && !size.isEmpty()) {
+                        model.setValueAt(type, selectedRowIndex, 1);
+                        model.setValueAt(name, selectedRowIndex, 2);
+                        model.setValueAt(price, selectedRowIndex, 3);
+                        model.setValueAt(size, selectedRowIndex, 4);
+                        txtName.setText("");
+                        txtPrice.setText("");
+                        txtSize.setText("");
+                        selectedRowIndex = -1;
+                    }
+                }
+            }
+        });
+
+        table.getSelectionModel().addListSelectionListener(event -> {
+            if (!event.getValueIsAdjusting() && table.getSelectedRow() != -1) {
+                selectedRowIndex = table.getSelectedRow();
+                comboBox.setSelectedItem(table.getValueAt(selectedRowIndex, 1).toString());
+            }
+        });
+
+        JLabel lblBackground = new JLabel();
+        lblBackground.setBounds(-713, -35, 1958, 822);
+        lblBackground.setIcon(new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_system_admin\\product_background.png"));
+        contentPane.add(lblBackground);
+    }
+}

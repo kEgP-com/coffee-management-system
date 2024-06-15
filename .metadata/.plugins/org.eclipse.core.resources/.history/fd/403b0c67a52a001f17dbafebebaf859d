@@ -1,0 +1,192 @@
+package kape_System;
+
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import kape_system_admin.user_admin_page;
+
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.awt.Font;
+import javax.swing.JPasswordField;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JCheckBox;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
+
+public class personal_regis extends JFrame {
+
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JTextField Juser;
+    private JPasswordField Jconfirm;
+    private JPasswordField Jyourpassword;
+    private JTextField Jemail;
+    private user_admin_page adminPage;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    personal_regis frame = new personal_regis();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the frame.
+     */
+    public personal_regis() {
+    	
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(455, 100, 644, 436);
+        
+        contentPane = new JPanel();
+        contentPane.setBackground(Color.WHITE);
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        JLabel lblUsername = new JLabel("Username :");
+        lblUsername.setFont(new Font("Bell MT", Font.PLAIN, 11));
+        lblUsername.setBounds(221, 118, 60, 14);
+
+
+        JLabel lblEmail = new JLabel("Email :");
+        lblEmail.setFont(new Font("Bell MT", Font.PLAIN, 11));
+        lblEmail.setBounds(242, 145, 40, 14);
+
+
+        Juser = new JTextField();
+        Juser.setBounds(283, 117, 148, 17);
+        contentPane.add(Juser);
+        Juser.setColumns(10);
+
+        Jyourpassword = new JPasswordField();
+        Jyourpassword.setBounds(283, 173, 148, 17);
+        Jyourpassword.setEchoChar('X');
+        contentPane.add(Jyourpassword);
+
+        Jconfirm = new JPasswordField();
+        Jconfirm.setBounds(281, 201, 150, 17);
+        Jconfirm.setEchoChar('X');
+
+
+        JLabel lblPassword = new JLabel("Your Password :");
+        lblPassword.setFont(new Font("Bell MT", Font.PLAIN, 11));
+        lblPassword.setBounds(195, 174, 78, 14);
+
+
+        JLabel lblConfirmPass = new JLabel("Confirm Password :");
+        lblConfirmPass.setFont(new Font("Bell MT", Font.PLAIN, 11));
+        lblConfirmPass.setBounds(181, 202, 92, 14);
+
+        JButton btnRegister = new JButton("Register now");
+        btnRegister.setForeground(new Color(0, 0, 0));
+        btnRegister.setBackground(new Color(255, 228, 181));
+        btnRegister.setFont(new Font("Arial", Font.PLAIN, 9));
+        btnRegister.setFocusable(false);
+        btnRegister.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String username = Juser.getText();
+                String email = Jemail.getText();
+                String password = new String(Jyourpassword.getPassword());
+                String confirmPassword = new String(Jconfirm.getPassword());
+
+                if (username.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Please fill out username");
+                } else if (email.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Please fill out your email");
+                } else if (password.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Please fill out your password");
+                } else if (!password.equals(confirmPassword)) {
+                    JOptionPane.showMessageDialog(null, "Passwords do not match");
+                } else {
+                    if (adminPage == null) {
+                        adminPage = new user_admin_page();
+                    }
+                    
+                    String[] user = new String[]{String.valueOf(adminPage.nextId), username, email, password};
+                    adminPage.userList.add(user);
+                    adminPage.tableModel.addRow(user);
+                    adminPage.lblNumberOfUsers.setText("Number of Users: " + adminPage.userList.size());
+                    adminPage.nextId++;
+
+                    adminPage.setVisible(true); 
+
+                    dispose(); 
+                    login_page login = new login_page();
+                    login.setVisible(true);
+                }
+            }
+        });
+        btnRegister.setBounds(264, 231, 110, 31);
+        contentPane.add(btnRegister);
+
+        JLabel lblRegister = new JLabel("Register");
+        lblRegister.setHorizontalAlignment(SwingConstants.CENTER);
+        lblRegister.setForeground(new Color(160, 82, 45));
+        lblRegister.setBounds(242, 49, 156, 40);
+        lblRegister.setFont(new Font("Engravers MT", Font.BOLD, 20));
+
+
+        Jemail = new JTextField();
+        Jemail.setColumns(10);
+        Jemail.setBounds(283, 145, 148, 17);
+
+
+        JCheckBox JshowPass = new JCheckBox("");
+        JshowPass.setBackground(Color.WHITE);
+        JshowPass.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (JshowPass.isSelected()) {
+                    Jyourpassword.setEchoChar((char) 0);
+                    Jconfirm.setEchoChar((char) 0);
+                } else {
+                    Jyourpassword.setEchoChar('X');
+                    Jconfirm.setEchoChar('X');
+                }
+            }
+        });
+        JshowPass.setFont(new Font("Bell MT", Font.PLAIN, 11));
+        JshowPass.setBounds(436, 201, 21, 17);
+
+
+        JLabel lblBackground = new JLabel();
+        lblBackground.setIcon(new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_System\\background_kape.png"));
+        lblBackground.setBounds(0, 0, 667, 420);
+
+        JLabel lblBackgroundPage = new JLabel();
+        lblBackgroundPage.setBounds(144, -160, 1022, 593);
+        lblBackgroundPage.setIcon(new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_System\\register_box.png"));
+
+        
+        
+        contentPane.add(lblUsername);
+        contentPane.add(lblEmail);
+        contentPane.add(Jconfirm);
+        contentPane.add(lblPassword);
+        contentPane.add(lblConfirmPass);
+        contentPane.add(lblRegister);
+        contentPane.add(Jemail);
+        contentPane.add(JshowPass);
+        contentPane.add(lblBackgroundPage);
+        contentPane.add(lblBackground);
+
+    }
+}

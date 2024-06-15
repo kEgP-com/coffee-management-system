@@ -1,0 +1,125 @@
+package kape_System;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import java.awt.Font;
+import java.awt.Color;
+import javax.swing.SwingConstants;
+import javax.swing.JComboBox;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+@SuppressWarnings("unused")
+public class product_page extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private final JLabel lblBackground = new JLabel("image");
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					product_page frame = new product_page();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public product_page() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 905, 575);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		
+		JLabel lblBackground = new JLabel();
+        lblBackground.setBounds(0, 0, 891, 538);
+        ImageIcon icon = new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_System\\background_kape.png");
+        lblBackground.setIcon(icon);
+        
+        
+        JLabel lblTotal = new JLabel("Total: ");
+        lblTotal.setOpaque(true);
+        lblTotal.setBackground(new Color(255, 255, 255));
+        lblTotal.setFont(new Font("Tahoma", Font.PLAIN, 26));
+        lblTotal.setBounds(382, 276, 223, 49);
+        
+        JComboBox comboBox = new JComboBox();
+        comboBox.setBounds(382, 379, 223, 38);
+        
+        JButton btnPayment = new JButton("Proceed to payment");
+        btnPayment.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
+        btnPayment.setBounds(71, 426, 223, 49);
+        btnPayment.setFocusable(false);
+        
+        JButton btnAdd = new JButton("Add Product");
+        btnAdd.setBounds(382, 72, 136, 21);
+        
+        JButton btnRemoveProduct = new JButton("Remove Product");
+        btnRemoveProduct.setBounds(382, 103, 136, 21);
+        
+        JButton btnRemoveAll = new JButton("Remove All");
+        btnRemoveAll.setBounds(631, 195, 85, 21);
+        
+        JButton btnRestore = new JButton("Restore ");
+        btnRestore.setBounds(382, 147, 136, 21);
+        
+        JButton btnRestoreAll = new JButton("Restore All");
+        btnRestoreAll.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
+        btnRestoreAll.setBounds(382, 178, 136, 21);
+        
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(10, 74, 353, 343);
+        
+        
+        
+        
+        JList list = new JList();
+        scrollPane.setViewportView(list);
+        
+        contentPane.add(lblTotal);
+        
+        contentPane.add(comboBox);
+        contentPane.add(btnAdd);
+        contentPane.add(btnRemoveProduct);
+        contentPane.add(btnRestore);
+        contentPane.add(btnRestoreAll);
+        contentPane.add(btnPayment);
+        contentPane.add(scrollPane);
+        contentPane.add(lblBackground);
+        
+        
+        
+        
+        
+        
+	}
+}

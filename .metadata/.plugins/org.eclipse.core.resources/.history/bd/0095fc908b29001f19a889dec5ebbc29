@@ -1,0 +1,123 @@
+package kape_System;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
+public class contact_page extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					contact_page frame = new contact_page();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public contact_page() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 700, 400);
+		getContentPane().setLayout(new BorderLayout(0, 0));
+		JPanel panel = new JPanel();
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setLayout(null);
+		getContentPane().add(panel, BorderLayout.CENTER);
+		contactUsLabel = new JLabel("Contact Us");
+		contactUsLabel.setBounds(29, 30, 161, 50);
+		contactUsLabel.setFont(new Font("Arial", Font.PLAIN, 28));
+		panel.add(contactUsLabel);
+		JLabel lblNewLabel = new JLabel("Our mailing address is:");
+		lblNewLabel.setBounds(29, 90, 200, 20);
+		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 11));
+		panel.add(lblNewLabel);
+		JLabel lblNewLabel_1 = new JLabel("Katapatan homes");
+		lblNewLabel_1.setBounds(29, 110, 161, 20);
+		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 11));
+		panel.add(lblNewLabel_1);
+		JLabel lblNewLabel_2 = new JLabel("Cabuyao City");
+		lblNewLabel_2.setBounds(29, 130, 161, 14);
+		lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 11));
+		panel.add(lblNewLabel_2);
+		JLabel lblNewLabel_3 = new JLabel("Phone: 09946902381");
+		lblNewLabel_3.setBounds(29, 150, 161, 14);
+		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 11));
+		panel.add(lblNewLabel_3);
+		JLabel lblNewLabel_4_1 = new JLabel("E-mail:");
+		lblNewLabel_4_1.setBounds(245, 70, 100, 14);
+		lblNewLabel_4_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+		panel.add(lblNewLabel_4_1);
+		textField_1 = new JTextField();
+		textField_1.setBounds(355, 65, 243, 30);
+		textField_1.setColumns(10);
+		panel.add(textField_1);
+		JLabel lblNewLabel_5 = new JLabel("Message:");
+		lblNewLabel_5.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblNewLabel_5.setBounds(245, 120, 100, 14);
+		panel.add(lblNewLabel_5);
+		JTextArea textArea = new JTextArea();
+		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
+		JScrollPane scrollPane = new JScrollPane(textArea);
+		scrollPane.setBounds(355, 115, 243, 110);
+		panel.add(scrollPane);
+
+		JButton sendButton = new JButton("Send");
+		sendButton.setBounds(503, 235, 95, 30);
+		panel.add(sendButton);
+
+		sendButton.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		String email = textField_1.getText();
+		String message = textArea.getText();
+		if (email.isEmpty() && message.isEmpty()) {
+		JOptionPane.showMessageDialog(panel, "You need to input something", "Warning", JOptionPane.WARNING_MESSAGE);
+		} else if (email.isEmpty()) {
+		JOptionPane.showMessageDialog(panel, "Enter your email first", "Warning", JOptionPane.WARNING_MESSAGE);
+		} else if (message.isEmpty()) {
+		JOptionPane.showMessageDialog(panel, "Enter your message", "Warning", JOptionPane.WARNING_MESSAGE);
+		} else {
+		System.out.println("Email: " + email);
+		System.out.println("Message: " + message);
+		textField_1.setText("");
+		textArea.setText("");
+		JOptionPane.showMessageDialog(panel, "Your feedback has been sent to our team", "Info", JOptionPane.INFORMATION_MESSAGE);
+		}
+		}
+		});
+
+		textField_1.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		textArea.requestFocus();
+		}
+		});
+		}
+
+	}
+
+}

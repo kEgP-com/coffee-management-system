@@ -1,0 +1,68 @@
+package kape_System;
+
+import java.awt.EventQueue;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Font;
+import java.awt.Color;
+import javax.swing.SwingConstants;
+
+public class forgot_password_page extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					forgot_password_page frame = new forgot_password_page();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public forgot_password_page() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 925, 579);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblBackground = new JLabel();
+        lblBackground.setBounds(0, 0, 911, 542);
+        ImageIcon icon = new ImageIcon("C:\\Users\\kinpr\\Desktop\\Kape de cabuyao\\kape_System\\src\\kape_System\\background_kape.png");
+        lblBackground.setIcon(icon);
+        
+        
+        
+        JLabel lblLogin = new JLabel("Forgot Password?");
+        lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
+        lblLogin.setForeground(new Color(160, 82, 45));
+        lblLogin.setFont(new Font("Arial", Font.BOLD, 20));
+        lblLogin.setBounds(344, 56, 235, 40);
+        
+        
+        
+        
+        
+        
+        contentPane.add(lblLogin);
+        contentPane.add(lblBackground);
+	}
+}
